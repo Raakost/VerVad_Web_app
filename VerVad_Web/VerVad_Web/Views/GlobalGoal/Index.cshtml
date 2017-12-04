@@ -4,76 +4,66 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <div class="jumbotron sm-jumbo">
-        <h3>Verdensmål</h3>
-        <div class="form-inline">
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.Latitude, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-12">
-                    @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Longitude, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-12">
-                    @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.ImgURL, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-12">
-                    @Html.EditorFor(model => model.ImgURL, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ImgURL, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <hr />
-            <div class="col-md-12"><hr></div>
-            <h4>Detaljer</h4>
-            <div class="form-inline">
-                <div class="form-group col-md-4">
-                    <label>Dansk</label>
-                    <div style="padding-bottom: 3px">
-                        <input type="hidden" name="Translation.TranslatedTexts[0].LanguageISO" value="da" />
-                        <input class="form-control" type="text" name="Translation.TranslatedTexts[0].Title" placeholder="Dansk titel" />
-                    </div>
-                    <div class="txt-area">
-                        <textarea class="form-control" name="Translation.TranslatedTexts[0].Description" placeholder="Dansk beskrivelse"></textarea>
-                    </div>
-                </div>
-                <div class="form-group col-md-4">
-                    <label>Engelsk</label>
-                    <div style="padding-bottom: 3px">
-                        <input type="hidden" name="Translation.TranslatedTexts[1].LanguageISO" value="en" />
-                        <input class="form-control" type="text" name="Translation.TranslatedTexts[1].Title" placeholder="Engelsk titel" />
-                    </div>
-                    <div class="txt-area">
-                        <textarea class="form-control" name="Translation.TranslatedTexts[1].Description" placeholder="Engelsk beskrivelse"></textarea>
-                    </div>
-                </div>
-                <div class="form-group col-md-4">
-                    <label>Tysk</label>
-                    <div style="padding-bottom: 3px">
-                        <input type="hidden" name="Translation.TranslatedTexts[2].LanguageISO" value="de" />
-                        <input class="form-control" type="text" name="Translation.TranslatedTexts[2].Title" placeholder="Tysk titel" />
-                    </div>
-                    <div class="txt-area">
-                        <textarea class="form-control" name="Translation.TranslatedTexts[2].Description" placeholder="Tysk beskrivelse"></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group col-md-offset-11" style="margin-top:50px;">               
-                <button type="submit" class="btn-sm btn-labeled btn-primary remove-border-radius">
-                    <span class="btn-label"><i class="glyphicon glyphicon-floppy-disk"></i></span>Gem
-                </button>
+<div class="jumbotron sm-jumbo">
+    <h4>Opret Verdensmål</h4>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Latitude, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Longitude, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
             </div>
         </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImgURL, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.ImgURL, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ImgURL, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-inline">
+            <div class="form-group col-md-4">
+                <label>Dansk</label>
+                <div style="padding-bottom: 3px">
+                    <input type="hidden" name="Translation.TranslatedTexts[0].LanguageISO" value="da" />
+                    <input class="form-control" type="text" name="Translation.TranslatedTexts[0].Title" placeholder="Dansk titel" />
+                </div>
+                <div class="txt-area">
+                    <textarea class="form-control" name="Translation.TranslatedTexts[0].Description" placeholder="Dansk beskrivelse"></textarea>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Engelsk</label>
+                <div style="padding-bottom: 3px">
+                    <input type="hidden" name="Translation.TranslatedTexts[1].LanguageISO" value="en" />
+                    <input class="form-control" type="text" name="Translation.TranslatedTexts[1].Title" placeholder="Engelsk titel" />
+                </div>
+                <div class="txt-area">
+                    <textarea class="form-control" name="Translation.TranslatedTexts[1].Description" placeholder="Engelsk beskrivelse"></textarea>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Tysk</label>
+                <div style="padding-bottom: 3px">
+                    <input type="hidden" name="Translation.TranslatedTexts[2].LanguageISO" value="de" />
+                    <input class="form-control" type="text" name="Translation.TranslatedTexts[2].Title" placeholder="Tysk titel" />
+                </div>
+                <div class="txt-area">
+                    <textarea class="form-control" name="Translation.TranslatedTexts[2].Description" placeholder="Tysk beskrivelse"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-offset-11" style="margin-top:50px;">
+            <button type="submit" class="btn-sm btn-labeled btn-primary remove-border-radius">
+                <span class="btn-label"><i class="glyphicon glyphicon-floppy-disk"></i></span>Gem
+            </button>
+        </div>
     </div>
+</div>
 }
-
-@*<div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>*@

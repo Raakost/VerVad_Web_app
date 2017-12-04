@@ -6,11 +6,11 @@ using System.Web.Mvc;
 
 namespace VerVad_Web.Controllers
 {
-    public class HomeController : Controller
-    {
+    public class ArtworkController : Controller
+    {        
         public ActionResult Index()
         {
             return View();
-        }     
+        }
     }
 }
