@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VerVad_Web.Models
+namespace ServiceGateways.Entities
 {
     public class Language
     {
