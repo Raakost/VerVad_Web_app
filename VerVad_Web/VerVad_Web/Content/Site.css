@@ -26,11 +26,16 @@ textarea {
 
 .sm-jumbo {
     font-size: 14px;
+    border-radius: 1px !important;
+}
+
+.remove-border-radius-border {
+    border-radius: 1px;
+    border: none;
 }
 
 .remove-border-radius {
     border-radius: 1px;
-    border: none;
 }
 
 .btn-label {
@@ -49,5 +54,5 @@ textarea {
 
 .txt-area textarea {
     resize: none;
-    height: 200px;
+    height: 292px;
 }
