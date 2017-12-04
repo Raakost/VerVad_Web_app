@@ -3,26 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using BusinessLogic.Entities;
+using VerVad_Web.Models;
 
 namespace VerVad_Web.Controllers
 {
     public class GlobalGoalController : Controller
     {
-        // GET: GlobalGoal
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult CreateGlobalGoal()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult CreateGlobalGoal(GlobalGoal gg)
-        {
-            return View();
-        }
     }
 }

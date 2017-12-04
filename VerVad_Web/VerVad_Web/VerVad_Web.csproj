@@ -197,8 +197,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AudioVideo.cs" />
+    <Compile Include="Models\ChildrensText.cs" />
+    <Compile Include="Models\FrontPage.cs" />
+    <Compile Include="Models\GlobalGoal.cs" />
+    <Compile Include="Models\GlobalGoalImage.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Language.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Translation.cs" />
+    <Compile Include="Models\TranslationLanguage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -261,7 +269,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\GlobalGoal\CreateGlobalGoal.cshtml" />
     <Content Include="Views\GlobalGoal\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
