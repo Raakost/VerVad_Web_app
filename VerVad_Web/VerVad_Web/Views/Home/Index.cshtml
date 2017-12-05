@@ -33,10 +33,38 @@
                             <a href="@Url.Action("Update", "GlobalGoal", new { id = item.Id })"> @title.Title</a>
                         }
                     </td>
-                    <td style="text-align: center"><i class="material-icons">done</i></td>
-                    <td style="text-align: center"><i class="material-icons">done</i></td>
-                    <td style="text-align: center"><i class="material-icons">done</i></td>
-                    <td style="text-align: center"><i class="material-icons">done</i></td>
+                    @if (item.Artworks.Count == 0)
+                    {
+                        <td style="text-align: center"><i class="material-icons">done</i></td>
+                    }
+                    else
+                    {
+                        <td style="text-align: center"><i class="material-icons">clear</i></td>
+                    }
+                    @if (item.ChildrensTexts.Count == 0)
+                    {
+                        <td style="text-align: center"><i class="material-icons">done</i></td>
+                    }
+                    else
+                    {
+                        <td style="text-align: center"><i class="material-icons">clear</i></td>
+                    }
+                    @if (item.AudioVideo != null)
+                    {
+                        <td style="text-align: center"><i class="material-icons">done</i></td>
+                    }
+                    else
+                    {
+                        <td style="text-align: center"><i class="material-icons">clear</i></td>
+                    }
+                    @if (item.LandArts.Count == 0)
+                    {
+                        <td style="text-align: center"><i class="material-icons">done</i></td>
+                    }
+                    else
+                    {
+                        <td style="text-align: center"><i class="material-icons">clear</i></td>
+                    }                   
                     <td>
                         <button type="button" class="btn-sm btn-labeled btn-danger remove-border-radius-border">
                             <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Slet
@@ -57,27 +85,7 @@
                         }
                     </td>
                 </tr>
-            }
-            <tr>
-                <td><a href="">#2 Stop Sult</a></td>
-                <td style="text-align: center"><i class="material-icons">clear</i></td>
-                <td style="text-align: center"><i class="material-icons">done</i></td>
-                <td style="text-align: center"><i class="material-icons">clear</i></td>
-                <td style="text-align: center"><i class="material-icons">done</i></td>
-                <td>
-                    <button type="button" class="btn-sm btn-labeled btn-danger remove-border-radius-border">
-                        <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Slet
-                    </button>
-                </td>
-                <td>
-                    <button type="button" class="btn-sm btn-labeled btn-success remove-border-radius-border" style="width:80%;">
-                        <span class="btn-label" style="left:-20px;"><i class="glyphicon glyphicon-plus"></i></span>Publish
-                    </button>
-                </td>
-            </tr>
-
-
-
+            }          
         </tbody>
     </table>
 </div>
