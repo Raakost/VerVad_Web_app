@@ -18,14 +18,21 @@ namespace VerVad_Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(GlobalGoal gg)
+        public ActionResult CreateEditGlobalGoal(GlobalGoal gg)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    if(gg.Id == 0 || gg.Id.Equals(null))
+                    { 
                     gg = _GlobalGoalServiceGateway.Create(gg);
                     return RedirectToAction("Index");
+                    }
+                    else {
+                        gg = _GlobalGoalServiceGateway.Update(gg);
+                        return RedirectToAction("Home");
+                    }
                 }
 
             }
@@ -35,6 +42,19 @@ namespace VerVad_Web.Controllers
                 return View(gg);
             }
             return null;
+        }
+
+        public ActionResult Index(int id)
+        {
+            try
+            {
+                var gg = _GlobalGoalServiceGateway.Read(id);
+                return View(gg);
+            }
+            catch (Exception e)
+            {
+                return View(e.Message);
+            }
         }
 
 
