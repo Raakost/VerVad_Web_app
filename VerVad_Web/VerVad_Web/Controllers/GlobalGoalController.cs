@@ -40,7 +40,20 @@ namespace VerVad_Web.Controllers
                 return RedirectToAction("Index", gg);
             }
         }
-
+        [HttpGet]
+        public ActionResult Update(int id)
+        {
+            try
+            {
+                var gg = _GlobalGoalServiceGateway.Read(id);
+                return View(gg);
+            }
+            catch (Exception e)
+            {
+                return View(e.Message);
+            }
+        }
+        [HttpPost]
         public ActionResult Update(GlobalGoal gg)
         {
             try
@@ -64,18 +77,6 @@ namespace VerVad_Web.Controllers
             }
         }
 
-        public ActionResult Index(int id)
-        {
-            try
-            {
-                var gg = _GlobalGoalServiceGateway.Read(id);
-                return View(gg);
-            }
-            catch (Exception e)
-            {
-                return View(e.Message);
-            }
-        }
 
 
 

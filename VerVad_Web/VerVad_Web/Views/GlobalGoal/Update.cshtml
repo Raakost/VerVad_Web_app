@@ -1,7 +1,7 @@
 ﻿@model ServiceGateways.Entities.GlobalGoal
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Update", "GlobalGoal"))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Id)
