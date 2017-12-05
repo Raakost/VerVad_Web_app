@@ -18,18 +18,23 @@ namespace VerVad_Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index([Bind(Include ="Latitude,Longtitude, ImgUrl, Translation.TranslatedTexts")]GlobalGoal gg)
+        public ActionResult Index(GlobalGoal gg)
         {
-            if (ModelState.IsValid)
+            try
             {
-                gg = _GlobalGoalServiceGateway.Create(gg);
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View();
-            }
+                if (ModelState.IsValid)
+                {
+                    gg = _GlobalGoalServiceGateway.Create(gg);
+                    return RedirectToAction("Index");
+                }
 
+            }
+            catch(Exception e)
+            {
+                ModelState.AddModelError("error", e.Message);
+                return View(gg);
+            }
+            return null;
         }
 
 
