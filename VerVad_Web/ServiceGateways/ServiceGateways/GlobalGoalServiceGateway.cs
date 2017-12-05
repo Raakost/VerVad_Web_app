@@ -47,7 +47,15 @@ namespace ServiceGateways.ServiceGateways
 
         public GlobalGoal Update(GlobalGoal t)
         {
-            throw new NotImplementedException();
+            HttpResponseMessage response = Client.GetAsync($"api/GlobalGoal/{t}").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return response.Content.ReadAsAsync<GlobalGoal>().Result;
+            }
+            else
+            {
+                throw new Exception(response.StatusCode.ToString());
+            }
         }
     }
 }

@@ -1,0 +1,9 @@
+﻿@model ServiceGateways.Entities.GlobalGoal
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    @Html.Partial("CreateUpdatePartial", Model);
+}

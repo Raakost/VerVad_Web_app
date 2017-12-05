@@ -18,30 +18,50 @@ namespace VerVad_Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CreateEditGlobalGoal(GlobalGoal gg)
+        public ActionResult Create(GlobalGoal gg)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    if(gg.Id == 0 || gg.Id.Equals(null))
-                    { 
                     gg = _GlobalGoalServiceGateway.Create(gg);
                     return RedirectToAction("Index");
-                    }
-                    else {
-                        gg = _GlobalGoalServiceGateway.Update(gg);
-                        return RedirectToAction("Home");
-                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("Fejl i model", "Modellen er ugyldig, prøv igen!");
+                    return RedirectToAction("Index", gg);
                 }
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ModelState.AddModelError("error", e.Message);
-                return View(gg);
+                return RedirectToAction("Index", gg);
             }
-            return null;
+        }
+
+        public ActionResult Update(GlobalGoal gg)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    gg = _GlobalGoalServiceGateway.Update(gg);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("Fejl i model", "Modellen er ugyldig, prøv igen!");
+                    return RedirectToAction("Index", gg);
+                }
+
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("error", e.Message);
+                return RedirectToAction("Index", gg);
+            }
         }
 
         public ActionResult Index(int id)
@@ -56,6 +76,8 @@ namespace VerVad_Web.Controllers
                 return View(e.Message);
             }
         }
+
+
 
 
 

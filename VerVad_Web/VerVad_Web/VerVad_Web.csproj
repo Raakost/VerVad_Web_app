@@ -275,6 +275,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\GlobalGoal\Index.cshtml" />
     <Content Include="Views\Artwork\Index.cshtml" />
+    <Content Include="Views\GlobalGoal\CreateUpdatePartial.cshtml" />
+    <Content Include="Views\GlobalGoal\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
