@@ -9,6 +9,10 @@ namespace ServiceGateways.Entities
 {
     public class GlobalGoal
     {
+        public GlobalGoal()
+        {
+            Translation = new Translation();
+        }
         public int Id { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }

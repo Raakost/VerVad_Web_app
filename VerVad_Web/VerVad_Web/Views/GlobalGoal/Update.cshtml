@@ -1,9 +1,10 @@
-﻿@model ServiceGateways.Entities.GlobalGoal
+﻿@model VerVad_Web.ViewModels.GlobalGoals.GlobalGoalCreateUpdate
 
 
 @using (Html.BeginForm("Update", "GlobalGoal"))
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.GlobalGoal.Id)
+    @Html.HiddenFor(model => model.GlobalGoal.TranslationId)
     @Html.Partial("CreateUpdatePartial", Model);
 }

@@ -1,60 +1,47 @@
-﻿@model ServiceGateways.Entities.GlobalGoal
-
-
-
+﻿@model VerVad_Web.ViewModels.GlobalGoals.GlobalGoalCreateUpdate
 
 <div class="jumbotron sm-jumbo" style="padding-left:45px; padding-right:45px;">
     <h4 style="margin-top:0px;">OPRET VERDENSMÅL</h4>
     <hr style="border: 0.5px solid black;" />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="col-md-3">
-        @Html.LabelFor(model => model.Latitude, htmlAttributes: new { @class = "control-label" })
-        @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control remove-border-radius" } })
-        @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+        @Html.LabelFor(model => model.GlobalGoal.Latitude, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.GlobalGoal.Latitude, new { htmlAttributes = new { @class = "form-control remove-border-radius" } })
+        @Html.ValidationMessageFor(model => model.GlobalGoal.Latitude, "", new { @class = "text-danger" })
 
-        @Html.LabelFor(model => model.Longitude, htmlAttributes: new { @class = "control-label" })
-        @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control remove-border-radius" } })
-        @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+        @Html.LabelFor(model => model.GlobalGoal.Longitude, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.GlobalGoal.Longitude, new { htmlAttributes = new { @class = "form-control remove-border-radius" } })
+        @Html.ValidationMessageFor(model => model.GlobalGoal.Longitude, "", new { @class = "text-danger" })
 
-        @Html.LabelFor(model => model.ImgURL, htmlAttributes: new { @class = "control-label" })
-        @Html.EditorFor(model => model.ImgURL, new { htmlAttributes = new { @class = "form-control remove-border-radius" } })
-        @Html.ValidationMessageFor(model => model.ImgURL, "", new { @class = "text-danger" })
+        @Html.LabelFor(model => model.GlobalGoal.ImgURL, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.GlobalGoal.ImgURL, new { htmlAttributes = new { @class = "form-control remove-border-radius" } })
+        @Html.ValidationMessageFor(model => model.GlobalGoal.ImgURL, "", new { @class = "text-danger" })
 
         <button type="button" class="btn-sm btn-labeled btn-primary remove-border-radius-border" style="margin-top: 15px;">
             <span class="btn-label"><i class="glyphicon glyphicon-picture"></i></span>Tilføj Billede
         </button>
-        <img class="col-md-12" src="http://via.placeholder.com/600x600" style="padding:0px; margin-top:15px; max-height: 165px;" />
+        <img class="col-md-12" src="@Model.GlobalGoal.ImgURL" style="padding:0px; margin-top:15px; max-height: 165px;" />
     </div>
-    <div class="form-horizontal col-md-3">
-        <label>Dansk</label>
-        <div style="padding-bottom: 3px">
-            <input type="hidden" name="Translation.TranslatedTexts[0].LanguageISO" value="da" />
-            <input class="form-control remove-border-radius" type="text" name="Translation.TranslatedTexts[0].Title" placeholder="Titel" />
+    @for (int i = 0; i < Model.Languages.Count; i++)
+    {
+        var lang = Model.Languages[i];
+        var langText = Model.GlobalGoal.Translation.TranslatedTexts.FirstOrDefault(x => x.TranslationId == Model.GlobalGoal.TranslationId && x.LanguageISO == lang.ISO);
+        if (langText == null)
+        {
+            langText = new ServiceGateways.Entities.TranslationLanguage();
+        }
+        <div class="form-horizontal col-md-3">
+            <label>@lang.Country</label>
+            <div style="padding-bottom: 3px">
+                <input type="hidden" name="GlobalGoal.Translation.TranslatedTexts[@i].LanguageISO" value="@lang.ISO" />
+                <input type="hidden" name="GlobalGoal.Translation.TranslatedTexts[@i].TranslationId" value="@Model.GlobalGoal.TranslationId" />
+                <input class="form-control remove-border-radius" type="text" name="GlobalGoal.Translation.TranslatedTexts[@i].Title" placeholder="Titel" value="@langText.Title" />
+                <div class="txt-area">
+                    <textarea class="form-control remove-border-radius" name="GlobalGoal.Translation.TranslatedTexts[@i].Description" placeholder="Beskrivelse">@langText.Description</textarea>
+                </div>
+            </div>
         </div>
-        <div class="txt-area">
-            <textarea class="form-control remove-border-radius" name="Translation.TranslatedTexts[0].Description" placeholder="Beskrivelse"></textarea>
-        </div>
-    </div>
-    <div class="form-horizontal col-md-3">
-        <label>Engelsk</label>
-        <div style="padding-bottom: 3px">
-            <input type="hidden" name="Translation.TranslatedTexts[1].LanguageISO" value="en" />
-            <input class="form-control remove-border-radius" type="text" name="Translation.TranslatedTexts[1].Title" placeholder="Titel" />
-        </div>
-        <div class="txt-area">
-            <textarea class="form-control remove-border-radius" name="Translation.TranslatedTexts[1].Description" placeholder="Beskrivelse"></textarea>
-        </div>
-    </div>
-    <div class="form-horizontal col-md-3">
-        <label>Tysk</label>
-        <div style="padding-bottom: 3px">
-            <input type="hidden" name="Translation.TranslatedTexts[2].LanguageISO" value="de" />
-            <input class="form-control remove-border-radius" type="text" name="Translation.TranslatedTexts[2].Title" placeholder="Titel" />
-        </div>
-        <div class="txt-area">
-            <textarea class="form-control remove-border-radius" name="Translation.TranslatedTexts[2].Description" placeholder="Beskrivelse"></textarea>
-        </div>
-    </div>
+    } 
     <div class="form-horizontal" align="right">
         <button type="submit" class="btn-sm btn-labeled btn-success remove-border-radius-border" style="margin-top: 15px; margin-right: 15px;">
             <span class="btn-label"><i class="glyphicon glyphicon-floppy-disk"></i></span>Gem & Fortsæt

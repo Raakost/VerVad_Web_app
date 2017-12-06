@@ -55,7 +55,8 @@ namespace ServiceGateways.ServiceGateways
 
         public GlobalGoal Update(GlobalGoal t)
         {
-            HttpResponseMessage response = Client.GetAsync($"api/GlobalGoal/{t}").Result;
+            //HttpResponseMessage response = Client.PostAsync($"api/GlobalGoal/{t}").Result;
+            HttpResponseMessage response = Client.PutAsJsonAsync($"api/GlobalGoal", t).Result;
             if (response.IsSuccessStatusCode)
             {
                 return response.Content.ReadAsAsync<GlobalGoal>().Result;

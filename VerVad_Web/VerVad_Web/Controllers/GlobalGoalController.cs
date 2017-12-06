@@ -6,74 +6,89 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using VerVad_Web.ViewModels.GlobalGoals;
+using ServiceGateways.ServiceGateways;
 
 namespace VerVad_Web.Controllers
 {
     public class GlobalGoalController : Controller
     {
         private IServiceGateway<GlobalGoal, int> _GlobalGoalServiceGateway = new ServiceGatewayFacade().GetGlobalGoalServiceGateway();
+        private LanguageServiceGateway _languageServiceGateway = new ServiceGatewayFacade().GetLanguageServiceGateway();
+
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            var vm = new GlobalGoalCreateUpdate();
+            vm.GlobalGoal = new GlobalGoal();
+            vm.Languages = _languageServiceGateway.ReadAll();
+
+            return View(vm);
         }
+
         [HttpPost]
-        public ActionResult Create(GlobalGoal gg)
+        public ActionResult Create(GlobalGoalCreateUpdate vm)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    gg = _GlobalGoalServiceGateway.Create(gg);
+                    var gg = _GlobalGoalServiceGateway.Create(vm.GlobalGoal);
                     return RedirectToAction("Index");
                 }
                 else
                 {
                     ModelState.AddModelError("Fejl i model", "Modellen er ugyldig, prøv igen!");
-                    return RedirectToAction("Index", gg);
+                    return RedirectToAction("Index", vm.GlobalGoal);
                 }
 
             }
             catch (Exception e)
             {
                 ModelState.AddModelError("error", e.Message);
-                return RedirectToAction("Index", gg);
+                return RedirectToAction("Index", vm.GlobalGoal);
             }
         }
+
         [HttpGet]
         public ActionResult Update(int id)
         {
             try
             {
                 var gg = _GlobalGoalServiceGateway.Read(id);
-                return View(gg);
+                var vm = new GlobalGoalCreateUpdate();
+                vm.GlobalGoal = gg;
+                vm.Languages = _languageServiceGateway.ReadAll();
+
+                return View(vm);
             }
             catch (Exception e)
             {
                 return View(e.Message);
             }
         }
+
         [HttpPost]
-        public ActionResult Update(GlobalGoal gg)
+        public ActionResult Update(GlobalGoalCreateUpdate vm)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    gg = _GlobalGoalServiceGateway.Update(gg);
-                    return RedirectToAction("Index");
+                    var gg = _GlobalGoalServiceGateway.Update(vm.GlobalGoal);
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
                     ModelState.AddModelError("Fejl i model", "Modellen er ugyldig, prøv igen!");
-                    return RedirectToAction("Index", gg);
+                    return View("Update", vm.GlobalGoal);
                 }
 
             }
             catch (Exception e)
             {
                 ModelState.AddModelError("error", e.Message);
-                return RedirectToAction("Index", gg);
+                return View("Update", vm.GlobalGoal);
             }
         }
 
