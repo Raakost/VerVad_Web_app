@@ -9,6 +9,11 @@ namespace ServiceGateways.Entities
 {
     public class FrontPage
     {
+        public FrontPage()
+        {
+            Translation = new Translation();
+        }
+
         public int Id { get; set; }
         public string ImgURL { get; set; }
         public int TranslationId { get; set; }
