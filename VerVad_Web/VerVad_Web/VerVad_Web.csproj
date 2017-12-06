@@ -204,6 +204,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArtworkController.cs" />
+    <Compile Include="Controllers\FrontPageController.cs" />
     <Compile Include="Controllers\GlobalGoalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -215,6 +216,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\FrontpageUpdate\FrontPageUpdateViewModel.cs" />
     <Compile Include="ViewModels\GlobalGoals\GlobalGoalCreateUpdate.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -278,6 +280,7 @@
     <Content Include="Views\Artwork\Index.cshtml" />
     <Content Include="Views\GlobalGoal\CreateUpdatePartial.cshtml" />
     <Content Include="Views\GlobalGoal\Update.cshtml" />
+    <Content Include="Views\FrontPage\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
