@@ -26,7 +26,15 @@ namespace ServiceGateways.ServiceGateways
 
         public FrontPage Update(FrontPage t)
         {
-            throw new NotImplementedException();
+            HttpResponseMessage response = Client.PutAsJsonAsync($"api/FrontPage", t).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return response.Content.ReadAsAsync<FrontPage>().Result;
+            }
+            else
+            {
+                throw new Exception(response.StatusCode.ToString());
+            }
         }
     }
 }
