@@ -9,19 +9,24 @@ using System.Threading.Tasks;
 
 namespace ServiceGateways.ServiceGateways
 {
-    public class LanguageServiceGateway : AbstractServiceGateway, ILanguageServiceGateway<Language>
+    public class FrontPageServiceGateway : AbstractServiceGateway, IFrontPageServiceGateway<FrontPage, int>
     {
-        public List<Language> ReadAll()
+        public FrontPage Read(int id)
         {
-            HttpResponseMessage response = Client.GetAsync($"api/Language").Result;
+            HttpResponseMessage response = Client.GetAsync($"api/FrontPage/{id}").Result;
             if (response.IsSuccessStatusCode)
             {
-                return response.Content.ReadAsAsync<List<Language>>().Result;
+                return response.Content.ReadAsAsync<FrontPage>().Result;
             }
             else
             {
                 throw new Exception(response.StatusCode.ToString());
             }
+        }
+
+        public FrontPage Update(FrontPage t)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -84,9 +84,12 @@
     <Compile Include="Entities\TranslationLanguage.cs" />
     <Compile Include="Facade\ServiceGatewayFacade.cs" />
     <Compile Include="Interfaces\IAuthorizationServiceGateway.cs" />
+    <Compile Include="Interfaces\ILanguageServiceGateway.cs" />
+    <Compile Include="Interfaces\IFrontPageServiceGateway.cs" />
     <Compile Include="Interfaces\IServiceGateway.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceGateways\AbstractServiceGateway.cs" />
+    <Compile Include="ServiceGateways\FrontPageServiceGateway.cs" />
     <Compile Include="ServiceGateways\GlobalGoalServiceGateway.cs" />
     <Compile Include="ServiceGateways\LanguageServiceGateway.cs" />
     <Compile Include="User.cs" />
