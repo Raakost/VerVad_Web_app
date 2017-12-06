@@ -12,15 +12,21 @@ namespace ServiceGateways.Facade
     public class ServiceGatewayFacade
     {
         private IServiceGateway<GlobalGoal, int> _globalGoalGateway;
-        private LanguageServiceGateway _languageServiceGateway;
+        private ILanguageServiceGateway<Language> _languageGateway;
+        private IFrontPageServiceGateway<FrontPage, int> _frontPageGateway;
         public IServiceGateway<GlobalGoal, int> GetGlobalGoalServiceGateway()
         {
             return _globalGoalGateway ?? (_globalGoalGateway = new GlobalGoalServiceGateway());
         }
 
-        public LanguageServiceGateway GetLanguageServiceGateway()
+        public ILanguageServiceGateway<Language> GetLanguageServiceGateway()
         {
-            return _languageServiceGateway ?? (_languageServiceGateway = new LanguageServiceGateway());
+            return _languageGateway ?? (_languageGateway = new LanguageServiceGateway());
+        }
+
+        public IFrontPageServiceGateway<FrontPage, int> GetFrontPageServiceGateway()
+        {
+            return _frontPageGateway ?? (_frontPageGateway = new FrontPageServiceGateway());
         }
     }
 }

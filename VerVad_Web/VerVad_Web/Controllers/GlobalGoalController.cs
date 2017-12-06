@@ -14,7 +14,7 @@ namespace VerVad_Web.Controllers
     public class GlobalGoalController : Controller
     {
         private IServiceGateway<GlobalGoal, int> _GlobalGoalServiceGateway = new ServiceGatewayFacade().GetGlobalGoalServiceGateway();
-        private LanguageServiceGateway _languageServiceGateway = new ServiceGatewayFacade().GetLanguageServiceGateway();
+        private ILanguageServiceGateway<Language> _languageServiceGateway = new ServiceGatewayFacade().GetLanguageServiceGateway();
 
         [HttpGet]
         public ActionResult Index()
@@ -89,6 +89,19 @@ namespace VerVad_Web.Controllers
             {
                 ModelState.AddModelError("error", e.Message);
                 return View("Update", vm.GlobalGoal);
+            }
+        }
+
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                _GlobalGoalServiceGateway.Delete(id);
+                return RedirectToAction("Index","Home");
+            }
+            catch(Exception e)
+            {
+                return RedirectToAction("Index", "Home", e.Message);
             }
         }
 

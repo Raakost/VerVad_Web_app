@@ -24,7 +24,12 @@ namespace ServiceGateways.ServiceGateways
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            HttpResponseMessage response = Client.DeleteAsync($"api/GlobalGoal/{id}").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return response.Content.ReadAsAsync<GlobalGoal>().Result != null;
+            }
+            return false;
         }
 
         public GlobalGoal Read(int id)
