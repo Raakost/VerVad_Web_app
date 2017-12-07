@@ -66,9 +66,13 @@
                         <td style="text-align: center"><i class="material-icons">clear</i></td>
                     }                   
                     <td>
-                        <button type="button" class="btn-sm btn-labeled btn-danger remove-border-radius-border">
+                    @using (Html.BeginForm("Delete", "GlobalGoal"))
+                    {
+                        <input type="hidden" name="id" value="@item.Id"/>
+                        <button type="submit" class="btn-sm btn-labeled btn-danger remove-border-radius-border">
                             <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Slet
                         </button>
+                    }
                     </td>
                     <td>
                         @if (item.IsPublished == true)
