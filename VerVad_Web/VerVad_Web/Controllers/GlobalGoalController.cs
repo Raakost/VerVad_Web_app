@@ -73,22 +73,23 @@ namespace VerVad_Web.Controllers
         {
             try
             {
+                var gg = new GlobalGoal();
                 if (ModelState.IsValid)
                 {
-                    var gg = _GlobalGoalServiceGateway.Update(vm.GlobalGoal);
+                    vm.GlobalGoal = _GlobalGoalServiceGateway.Update(vm.GlobalGoal);
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
                     ModelState.AddModelError("Fejl i model", "Modellen er ugyldig, prøv igen!");
-                    return View("Update", vm.GlobalGoal);
+                    return View("Update", vm);
                 }
 
             }
             catch (Exception e)
             {
                 ModelState.AddModelError("error", e.Message);
-                return View("Update", vm.GlobalGoal);
+                return View("Update", vm);
             }
         }
 
