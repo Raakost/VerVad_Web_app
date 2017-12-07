@@ -14,8 +14,8 @@ namespace ServiceGateways.Entities
             Translation = new Translation();
         }
         public int Id { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
+        public double? Latitude { get; set; }
+        public double? Longitude { get; set; }
         public string ImgURL { get; set; }
 
         public AudioVideo AudioVideo { get; set; }

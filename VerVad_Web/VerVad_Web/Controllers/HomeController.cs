@@ -18,5 +18,20 @@ namespace VerVad_Web.Controllers
         {
             return View(_gateway.ReadAll());
         }
+
+        public ActionResult TogglePublished(int id)
+        {
+            var gg = _gateway.Read(id);
+            if (gg.IsPublished)
+            {
+                gg.IsPublished = false;
+            }
+            else
+            {
+                gg.IsPublished = true;
+            }
+            _gateway.Update(gg);
+            return RedirectToAction("Index");
+        }
     }
 }

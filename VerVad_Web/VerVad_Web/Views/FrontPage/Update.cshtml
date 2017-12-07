@@ -4,18 +4,47 @@
 @Scripts.Render("~/bundles/jqueryval")
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Update", "FrontPage"))
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Frontpage.TranslationId)
+    @Html.HiddenFor(model => model.Frontpage.Id)
 
-    <div class="form-horizontal">
-        <h4>FrontPageUpdateViewModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+    <div class="jumbotron sm-jumbo" style="padding-left:45px; padding-right:45px;">
+        <h4 style="margin-top:0px;">REDIGER FORSIDE</h4>
+        <hr style="border: 0.5px solid black;" />
+        <div class="col-md-3">
+            <label></label>
+            @Html.TextBoxFor(model => model.Frontpage.ImgURL)
+            <img class="col-md-12" src="@Model.Frontpage.ImgURL" style="padding:0px; margin-top:15px; max-height: 165px;" />
+            <button type="button" class="btn-sm btn-labeled btn-primary remove-border-radius-border" style="margin-top: 15px;">
+                <span class="btn-label"><i class="glyphicon glyphicon-pencil"></i></span>Ret Billede
+            </button>
+        </div>
+        @for (int i = 0; i < Model.Languages.Count; i++)
+        {
+            var lang = Model.Languages[i];
+            var langText = Model.Frontpage.Translation.TranslatedTexts.FirstOrDefault(x => x.TranslationId == Model.Frontpage.TranslationId && x.LanguageISO == lang.ISO);
+            if (langText == null)
+            {
+                langText = new ServiceGateways.Entities.TranslationLanguage();
+            }
+            <div class="form-horizontal col-md-3">
+                <label>@lang.Country</label>
+                <div style="padding-bottom: 3px">
+                    <input type="hidden" name="FrontPage.Translation.TranslatedTexts[@i].LanguageISO" value="@lang.ISO" />
+                    <input type="hidden" name="FrontPage.Translation.TranslatedTexts[@i].TranslationId" value="@Model.Frontpage.TranslationId" />
+                    <input class="form-control remove-border-radius" required="required" type="text" name="FrontPage.Translation.TranslatedTexts[@i].Title" placeholder="Titel" value="@langText.Title" oninvalid="this.setCustomValidity('Feltet skal udfyldes!')" oninput="setCustomValidity('')"/>
+                    <div class="txt-area">
+                        <textarea class="form-control remove-border-radius" required="required" name="FrontPage.Translation.TranslatedTexts[@i].Description" placeholder="Beskrivelse" oninvalid="this.setCustomValidity('Feltet skal udfyldes!')" oninput="setCustomValidity('')">@langText.Description</textarea>
+                    </div>
+                </div>
             </div>
+        }
+        <div class="form-horizontal" align="right">
+            <button type="submit" class="btn-sm btn-labeled btn-success remove-border-radius-border" style="margin-top: 15px; margin-right: 15px;">
+                <span class="btn-label"><i class="glyphicon glyphicon-floppy-disk"></i></span>Gem
+            </button>
         </div>
     </div>
 }

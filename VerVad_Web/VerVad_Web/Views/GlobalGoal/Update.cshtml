@@ -4,7 +4,7 @@
 @using (Html.BeginForm("Update", "GlobalGoal"))
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.GlobalGoal.TranslationId);
-    @Html.HiddenFor(model => model.GlobalGoal.Id);
-    @Html.Partial("CreateUpdatePartial", Model);
+    @Html.HiddenFor(model => model.GlobalGoal.TranslationId)
+    @Html.HiddenFor(model => model.GlobalGoal.Id)
+    @Html.Partial("CreateUpdatePartial", Model)
 }

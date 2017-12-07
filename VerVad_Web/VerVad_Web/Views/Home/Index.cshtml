@@ -6,7 +6,7 @@
         <button onclick="location.href='@Url.Action("Index", "GlobalGoal")'" type="button" class="btn-sm btn-labeled btn-primary remove-border-radius-border">
             <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Opret nyt Verdensmål
         </button>
-        <button type="button" class="btn-sm  btn-labeled btn-primary remove-border-radius-border">
+        <button onclick="location.href='@Url.Action("Update", "FrontPage", new { id = 1 })'" type="button" class="btn-sm  btn-labeled btn-primary remove-border-radius-border">
             <span class="btn-label"><i class="glyphicon glyphicon-pencil"></i></span>Rediger Forside
         </button>
     </div>
@@ -33,7 +33,7 @@
                             <a href="@Url.Action("Update", "GlobalGoal", new { id = item.Id })"> @title.Title</a>
                         }
                     </td>
-                    @if (item.Artworks.Count == 0)
+                    @if (item.Artworks.Count != 0)
                     {
                         <td style="text-align: center"><i class="material-icons">done</i></td>
                     }
@@ -41,7 +41,7 @@
                     {
                         <td style="text-align: center"><i class="material-icons">clear</i></td>
                     }
-                    @if (item.ChildrensTexts.Count == 0)
+                    @if (item.ChildrensTexts.Count != 0)
                     {
                         <td style="text-align: center"><i class="material-icons">done</i></td>
                     }
@@ -57,35 +57,38 @@
                     {
                         <td style="text-align: center"><i class="material-icons">clear</i></td>
                     }
-                    @if (item.LandArts.Count == 0)
+                    @if (item.LandArts.Count != 0)
                     {
                         <td style="text-align: center"><i class="material-icons">done</i></td>
                     }
                     else
                     {
                         <td style="text-align: center"><i class="material-icons">clear</i></td>
-                    }                   
-                    <td>
+                    }
+                    <td>    
                         <button type="button" class="btn-sm btn-labeled btn-danger remove-border-radius-border">
                             <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Slet
                         </button>
                     </td>
-                    <td>
-                        @if (item.IsPublished == true)
+                    <td style="width:16%;">
+                        @using (Html.BeginForm("TogglePublished", "Home"))
                         {
-                            <button type="button" class="btn-sm btn-labeled btn-warning remove-border-radius-border" style="width:80%;">
-                                <span class="btn-label" style="left:-13px;"><i class="glyphicon glyphicon-minus"></i></span>Unpublish
-                            </button>
-                        }
-                        else
-                        {
-                            <button type="button" class="btn-sm btn-labeled btn-success remove-border-radius-border" style="width:80%;">
-                                <span class="btn-label" style="left:-20px;"><i class="glyphicon glyphicon-plus"></i></span>Publish
-                            </button>
-                        }
+                            <input type="hidden" name="id" value="@item.Id" />
+                            if (item.IsPublished == true)
+                            {
+                                <button type="submit" class="btn-sm btn-labeled btn-warning remove-border-radius-border" style="width:80%;">
+                                    <span class="btn-label" style="left:-13px;"><i class="glyphicon glyphicon-minus"></i></span>Unpublish
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn-sm btn-labeled btn-success remove-border-radius-border" style="width:80%;">
+                                    <span class="btn-label" style="left:-20px;"><i class="glyphicon glyphicon-plus"></i></span>Publish
+                                </button>
+                            }}
                     </td>
                 </tr>
-            }          
+            }
         </tbody>
     </table>
 </div>
