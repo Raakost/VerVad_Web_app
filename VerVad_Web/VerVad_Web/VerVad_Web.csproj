@@ -204,6 +204,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArtworkController.cs" />
+    <Compile Include="Controllers\ChildrensTextController.cs" />
     <Compile Include="Controllers\FrontPageController.cs" />
     <Compile Include="Controllers\GlobalGoalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -281,6 +282,7 @@
     <Content Include="Views\GlobalGoal\CreateUpdatePartial.cshtml" />
     <Content Include="Views\GlobalGoal\Update.cshtml" />
     <Content Include="Views\FrontPage\Update.cshtml" />
+    <Content Include="Views\ChildrensText\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

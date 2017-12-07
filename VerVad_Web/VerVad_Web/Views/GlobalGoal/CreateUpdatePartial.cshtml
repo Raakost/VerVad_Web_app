@@ -54,4 +54,20 @@
             <span class="btn-label"><i class="glyphicon glyphicon-floppy-disk"></i></span>Gem & Fortsæt
         </button>
     </div>
+    @if (Model.GlobalGoal.Id == 0)
+    {
+
+    }
+    else
+    {
+        <div>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs nav-justified" style="display:inline-block; margin-top:50px;">
+                <li><a class="btn btn-primary" href="#">Kunst</a></li>
+                <li><a class="btn btn-primary" href="@Url.Action("Index", "ChildrensText")">Tekst</a></li>
+                <li><a class="btn btn-primary" href="#">Landart</a></li>
+                <li><a class="btn btn-primary" href="#">Musik&Video</a></li>
+            </ul>
+        </div>
+    }
 </div>
