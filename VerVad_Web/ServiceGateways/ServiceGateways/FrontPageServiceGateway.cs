@@ -11,6 +11,7 @@ namespace ServiceGateways.ServiceGateways
 {
     public class FrontPageServiceGateway : AbstractServiceGateway, IFrontPageServiceGateway<FrontPage, int>
     {
+        //Read
         public FrontPage Read(int id)
         {
             HttpResponseMessage response = Client.GetAsync($"api/FrontPage/{id}").Result;
@@ -24,6 +25,7 @@ namespace ServiceGateways.ServiceGateways
             }
         }
 
+        //Update
         public FrontPage Update(FrontPage t)
         {
             HttpResponseMessage response = Client.PutAsJsonAsync($"api/FrontPage", t).Result;

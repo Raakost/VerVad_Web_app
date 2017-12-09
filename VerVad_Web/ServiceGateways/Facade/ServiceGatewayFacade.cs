@@ -14,6 +14,8 @@ namespace ServiceGateways.Facade
         private IServiceGateway<GlobalGoal, int> _globalGoalGateway;
         private ILanguageServiceGateway<Language> _languageGateway;
         private IFrontPageServiceGateway<FrontPage, int> _frontPageGateway;
+        private IChildrensTextServiceGateway<ChildrensText, int> _childrensTextGateway;
+
         public IServiceGateway<GlobalGoal, int> GetGlobalGoalServiceGateway()
         {
             return _globalGoalGateway ?? (_globalGoalGateway = new GlobalGoalServiceGateway());
@@ -27,6 +29,11 @@ namespace ServiceGateways.Facade
         public IFrontPageServiceGateway<FrontPage, int> GetFrontPageServiceGateway()
         {
             return _frontPageGateway ?? (_frontPageGateway = new FrontPageServiceGateway());
+        }
+
+        public IChildrensTextServiceGateway<ChildrensText, int> GetChildrensTextServiceGateway()
+        {
+            return _childrensTextGateway ?? (_childrensTextGateway = new ChildrensTextServiceGateway());
         }
     }
 }

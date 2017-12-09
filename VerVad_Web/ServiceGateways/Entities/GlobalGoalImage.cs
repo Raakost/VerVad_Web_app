@@ -12,6 +12,9 @@ namespace ServiceGateways.Entities
         public string ImgUrl { get; set; }
         public string Artist { get; set; } 
         public Translation Translation { get; set; }
+
+        public GlobalGoal GlobalGoal { get; set; }
+        public int GlobalGoalId { get; set; }
     }
 
     public class LandArt : GlobalGoalImage

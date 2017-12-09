@@ -25,10 +25,12 @@ namespace VerVad_Web.Controllers
             if (gg.IsPublished)
             {
                 gg.IsPublished = false;
+                TempData["toast"] = "Verdensmålet er ikke længere synligt i appen!";
             }
             else
             {
                 gg.IsPublished = true;
+                TempData["toast"] = "Verdensmålet er nu synligt i appen!";
             }
             _gateway.Update(gg);
             return RedirectToAction("Index");

@@ -34,7 +34,9 @@ namespace VerVad_Web.Controllers
                 if (ModelState.IsValid)
                 {
                     var gg = _GlobalGoalServiceGateway.Create(vm.GlobalGoal);
-                    return RedirectToAction("Index");
+                    TempData["toast"] = "Verdensmålet er oprettet!";
+                    return RedirectToAction("Update", new { id = gg.Id});
+                   
                 }
                 else
                 {
@@ -48,6 +50,7 @@ namespace VerVad_Web.Controllers
                 ModelState.AddModelError("error", e.Message);
                 return RedirectToAction("Index", vm.GlobalGoal);
             }
+           
         }
 
         [HttpGet]
@@ -77,7 +80,8 @@ namespace VerVad_Web.Controllers
                 if (ModelState.IsValid)
                 {
                     vm.GlobalGoal = _GlobalGoalServiceGateway.Update(vm.GlobalGoal);
-                    return RedirectToAction("Index", "Home");
+                    TempData["toast"] = "Dine ændringer er gemt!";
+                    return RedirectToAction("Update");
                 }
                 else
                 {
@@ -93,6 +97,7 @@ namespace VerVad_Web.Controllers
             }
         }
 
+        [HttpPost]
         public ActionResult Delete(int id)
         {
             try

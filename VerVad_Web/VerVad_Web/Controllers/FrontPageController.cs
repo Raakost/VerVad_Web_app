@@ -23,7 +23,7 @@ namespace VerVad_Web.Controllers
                 var fp = _frontPageServiceGateway.Read(id);
                 var vm = new FrontPageUpdateViewModel();
                 vm.Frontpage = fp;
-                vm.Languages = _languageServiceGateway.ReadAll();
+                vm.Languages = _languageServiceGateway.ReadAll();                
                 return View(vm);
             }
             catch (Exception e)
@@ -41,7 +41,8 @@ namespace VerVad_Web.Controllers
                 if (ModelState.IsValid)
                 {
                     var fp = _frontPageServiceGateway.Update(vm.Frontpage);
-                    return RedirectToAction("index", "Home");
+                    TempData["toast"] = "Dine ændringer er gemt!";
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {

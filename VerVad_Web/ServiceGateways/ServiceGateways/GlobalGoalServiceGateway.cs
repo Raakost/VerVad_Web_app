@@ -11,6 +11,7 @@ namespace ServiceGateways.ServiceGateways
 {
     public class GlobalGoalServiceGateway : AbstractServiceGateway, IServiceGateway<GlobalGoal, int>
     {
+        //Create
         public GlobalGoal Create(GlobalGoal t)
         {
             //AddAuthorizationHeader();
@@ -22,6 +23,7 @@ namespace ServiceGateways.ServiceGateways
             return null;
         }
 
+        //Delete
         public bool Delete(int id)
         {
             HttpResponseMessage response = Client.DeleteAsync($"api/GlobalGoal/{id}").Result;
@@ -32,6 +34,7 @@ namespace ServiceGateways.ServiceGateways
             return false;
         }
 
+        //Read
         public GlobalGoal Read(int id)
         {
             HttpResponseMessage response = Client.GetAsync($"api/GlobalGoal/{id}").Result;
@@ -45,6 +48,7 @@ namespace ServiceGateways.ServiceGateways
             }
         }
 
+        //ReadAll
         public List<GlobalGoal> ReadAll()
         {
             HttpResponseMessage response = Client.GetAsync($"api/GlobalGoal").Result;
@@ -58,9 +62,9 @@ namespace ServiceGateways.ServiceGateways
             }
         }
 
+        //Update
         public GlobalGoal Update(GlobalGoal t)
         {
-            //HttpResponseMessage response = Client.PostAsync($"api/GlobalGoal/{t}").Result;
             HttpResponseMessage response = Client.PutAsJsonAsync($"api/GlobalGoal", t).Result;
             if (response.IsSuccessStatusCode)
             {

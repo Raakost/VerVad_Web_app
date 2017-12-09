@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<ServiceGateways.Entities.GlobalGoal>
 
+
 <div class="jumbotron sm-jumbo">
     <h4 style="margin-top:0px;">OVERSIGT</h4>
     <div class="edit-btns" style="display:block" align="right">
@@ -66,7 +67,7 @@
                         <td style="text-align: center"><i class="material-icons">clear</i></td>
                     }
                     <td>
-                        @using (Html.BeginForm("Delete", "GlobalGoal"))
+                        @using (Html.BeginForm("Delete", "GlobalGoal", FormMethod.Post))
                         {
                             <input type="hidden" name="id" value="@item.Id" />
                             <button type="submit" class="btn-sm btn-labeled btn-danger remove-border-radius-border">
@@ -75,20 +76,20 @@
                         }
                     </td>
                     <td style="width:14%;">
-                        @using (Html.BeginForm("TogglePublished", "Home"))
+                        @using (Html.BeginForm("TogglePublished", "Home", FormMethod.Get))
                         {
                             <input type="hidden" name="id" value="@item.Id" />
                             if (item.IsPublished == true)
                             {
                                 <button type="submit" class="btn-sm btn-labeled btn-warning remove-border-radius-border" style="width:100%;">
                                     <span class="btn-label" style="left:-16px;"><i class="glyphicon glyphicon-minus"></i></span>Unpublish
-                                </button>
+                                </button>                                
                             }
                             else
                             {
                                 <button type="submit" class="btn-sm btn-labeled btn-success remove-border-radius-border" style="width:100%;">
                                     <span class="btn-label" style="left:-24px;"><i class="glyphicon glyphicon-plus"></i></span>Publish
-                                </button>
+                                </button>                                
                             }
                         }
                     </td>

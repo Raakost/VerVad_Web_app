@@ -1,7 +1,7 @@
 ﻿@model VerVad_Web.ViewModels.GlobalGoals.GlobalGoalCreateUpdate
 
 
-@using (Html.BeginForm("Create", "GlobalGoal"))
+@using (Html.BeginForm("Create", "GlobalGoal", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.Partial("CreateUpdatePartial", Model);

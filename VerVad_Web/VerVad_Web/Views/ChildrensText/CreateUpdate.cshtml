@@ -1,0 +1,53 @@
+﻿@model  VerVad_Web.ViewModels.ChildrensTexts.ChildrensTextCreateUpdate
+
+<div class="modal fade" id="childrensTxt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="width: 1200px;">
+        @using (Html.BeginForm(Model.ChildrensText.Id == 0 ? "Create" : "Update", "ChildrensText", FormMethod.Post))
+        {
+            @Html.HiddenFor(x => x.ChildrensText.TranslationId)
+            @Html.HiddenFor(x => x.ChildrensText.Translation.Id)
+            @Html.HiddenFor(x => x.ChildrensText.Id)
+            <div class="modal-content" style="border-radius:1px;">
+                <div class="modal-header" style="background-color:#232322;">
+                    <h4 class="modal-title" style="color:white;" id="exampleModalLabel">OPRET TEKST</h4>
+                </div>
+                <div class="modal-body" style="background-color:#eeeeee;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(x => x.ChildrensText.Author, new { @class = "form-control remove-border-radius", placeholder = "Forfatter" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        @for (int i = 0; i < Model.Languages.Count; i++)
+                        {
+                            var lang = Model.Languages[i];
+                            var langText = Model.ChildrensText.Translation.TranslatedTexts.FirstOrDefault(x => x.TranslationId == Model.ChildrensText.TranslationId && x.LanguageISO == lang.ISO);
+                            if (langText == null)
+                            {
+                                langText = new ServiceGateways.Entities.TranslationLanguage();
+                            }
+                            <div class="col-md-4">
+                                <label>@lang.Country</label>
+                                <div style="padding-bottom: 3px">
+                                    <input type="hidden" name="ChildrensText.GlobalGoalId" value="@Model.GlobalGoalId" />
+                                    <input type="hidden" name="ChildrensText.Translation.TranslatedTexts[@i].LanguageISO" value="@lang.ISO" />
+                                    <input type="hidden" name="ChildrensText.Translation.TranslatedTexts[@i].TranslationId" value="@Model.ChildrensText.TranslationId" />                                    
+                                    @Html.TextBox("ChildrensText.Translation.TranslatedTexts[" + i + "].Title", langText.Title, new { @class = "form-control remove-border-radius", required = "true", placeholder = "Titel" })
+                                    @Html.ValidationMessage("ChildrensText.Translation.TranslatedTexts[" + i + "].Title", "", new { @class = "text-danger" })
+                                    <div class="txt-area">
+                                        @Html.TextArea("ChildrensText.Translation.TranslatedTexts[" + i + "].Description", langText.Description, new { @class = "form-control remove-border-radius", required = "true", placeholder = "Beskrivelse" })
+                                        @Html.ValidationMessage("ChildrensText.Translation.TranslatedTexts[" + i + "].Description", "", new { @class = "text-danger" })                                        
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="modal-footer" style="background-color:#eeeeee; margin-top:0px;">
+                    <button type="button" class="btn btn-warning remove-border-radius-border" data-dismiss="modal">Annuller</button>
+                    <button type="submit" class="btn btn-success remove-border-radius-border">Gem</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

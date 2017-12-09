@@ -4,7 +4,7 @@
 @Scripts.Render("~/bundles/jqueryval")
 
 
-@using (Html.BeginForm("Update", "FrontPage"))
+@using (Html.BeginForm("Update", "FrontPage", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Frontpage.TranslationId)
@@ -34,9 +34,11 @@
                 <div style="padding-bottom: 3px">
                     <input type="hidden" name="FrontPage.Translation.TranslatedTexts[@i].LanguageISO" value="@lang.ISO" />
                     <input type="hidden" name="FrontPage.Translation.TranslatedTexts[@i].TranslationId" value="@Model.Frontpage.TranslationId" />
-                    <input class="form-control remove-border-radius" required="required" type="text" name="FrontPage.Translation.TranslatedTexts[@i].Title" placeholder="Titel" value="@langText.Title" oninvalid="this.setCustomValidity('Feltet skal udfyldes!')" oninput="setCustomValidity('')"/>
+                    @Html.TextBox("FrontPage.Translation.TranslatedTexts[" + i + "].Title", langText.Title, new { @class = "form-control remove-border-radius", required = "true", placeholder = "Titel" })
+                    @Html.ValidationMessage("FrontPage.Translation.TranslatedTexts[" + i + "].Title", "", new { @class = "text-danger" })
                     <div class="txt-area">
-                        <textarea class="form-control remove-border-radius" required="required" name="FrontPage.Translation.TranslatedTexts[@i].Description" placeholder="Beskrivelse" oninvalid="this.setCustomValidity('Feltet skal udfyldes!')" oninput="setCustomValidity('')">@langText.Description</textarea>
+                        @Html.TextArea("FrontPage.Translation.TranslatedTexts[" + i + "].Description", langText.Description, new { @class = "form-control remove-border-radius", required = "true", placeholder = "Beskrivelse" })
+                        @Html.ValidationMessage("FrontPage.Translation.TranslatedTexts[" + i + "].Description", "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -46,5 +48,6 @@
                 <span class="btn-label"><i class="glyphicon glyphicon-floppy-disk"></i></span>Gem
             </button>
         </div>
+        <a href="@Url.Action("Index", "Home")">Tilbage</a>
     </div>
 }

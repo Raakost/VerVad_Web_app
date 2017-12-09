@@ -11,17 +11,17 @@
     }
     <hr style="border: 0.5px solid black;" />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="col-md-3">
+    <div class="col-md-3">        
         @Html.LabelFor(model => model.GlobalGoal.Latitude, htmlAttributes: new { @class = "control-label" })
-        @Html.EditorFor(model => model.GlobalGoal.Latitude, new { htmlAttributes = new { @class = "form-control remove-border-radius", required = "required", oninvalid = "this.setCustomValidity('Feltet skal udfyldes!')", oninput = "setCustomValidity('')" } })
+        @Html.EditorFor(model => model.GlobalGoal.Latitude, new { htmlAttributes = new { @class = "form-control remove-border-radius", required = "true" } })
         @Html.ValidationMessageFor(model => model.GlobalGoal.Latitude, "", new { @class = "text-danger" })
 
         @Html.LabelFor(model => model.GlobalGoal.Longitude, htmlAttributes: new { @class = "control-label" })
-        @Html.EditorFor(model => model.GlobalGoal.Longitude, new { htmlAttributes = new { @class = "form-control remove-border-radius", required = "required", oninvalid = "this.setCustomValidity('Feltet skal udfyldes!')", oninput = "setCustomValidity('')" } })
+        @Html.EditorFor(model => model.GlobalGoal.Longitude, new { htmlAttributes = new { @class = "form-control remove-border-radius", required = "true" } })
         @Html.ValidationMessageFor(model => model.GlobalGoal.Longitude, "", new { @class = "text-danger" })
 
         @Html.LabelFor(model => model.GlobalGoal.ImgURL, htmlAttributes: new { @class = "control-label" })
-        @Html.EditorFor(model => model.GlobalGoal.ImgURL, new { htmlAttributes = new { @class = "form-control remove-border-radius", required = "required", oninvalid = "this.setCustomValidity('Feltet skal udfyldes!')", oninput = "setCustomValidity('')" } })
+        @Html.EditorFor(model => model.GlobalGoal.ImgURL, new { htmlAttributes = new { @class = "form-control remove-border-radius", required = "true" } })
         @Html.ValidationMessageFor(model => model.GlobalGoal.ImgURL, "", new { @class = "text-danger" })
 
         <button type="button" class="btn-sm btn-labeled btn-primary remove-border-radius-border" style="margin-top: 15px;">
@@ -42,9 +42,11 @@
             <div style="padding-bottom: 3px">
                 <input type="hidden" name="GlobalGoal.Translation.TranslatedTexts[@i].LanguageISO" value="@lang.ISO" />
                 <input type="hidden" name="GlobalGoal.Translation.TranslatedTexts[@i].TranslationId" value="@Model.GlobalGoal.TranslationId" />
-                <input class="form-control remove-border-radius" required="required" type="text" name="GlobalGoal.Translation.TranslatedTexts[@i].Title" placeholder="Titel" value="@langText.Title" oninvalid="this.setCustomValidity('Feltet skal udfyldes!')" oninput="setCustomValidity('')" />
+                @Html.TextBox("GlobalGoal.Translation.TranslatedTexts[" + i + "].Title", langText.Title, new { @class = "form-control remove-border-radius", required = "true", placeholder = "Titel" })
+                @Html.ValidationMessage("GlobalGoal.Translation.TranslatedTexts[" + i + "].Title", "", new { @class = "text-danger" })
                 <div class="txt-area">
-                    <textarea class="form-control remove-border-radius" required="required" name="GlobalGoal.Translation.TranslatedTexts[@i].Description" placeholder="Beskrivelse" oninvalid="this.setCustomValidity('Feltet skal udfyldes!')" oninput="setCustomValidity('')">@langText.Description</textarea>
+                    @Html.TextArea("GlobalGoal.Translation.TranslatedTexts[" + i + "].Description", langText.Description, new { @class = "form-control remove-border-radius", required = "true", placeholder = "Beskrivelse" })
+                    @Html.ValidationMessage("GlobalGoal.Translation.TranslatedTexts[" + i + "].Description", "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -61,13 +63,14 @@
     else
     {
         <div>
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs nav-justified" style="display:inline-block; margin-top:50px;">
-                <li><a class="btn btn-primary" href="#">Kunst</a></li>
-                <li><a class="btn btn-primary" href="@Url.Action("Index", "ChildrensText")">Tekst</a></li>
-                <li><a class="btn btn-primary" href="#">Landart</a></li>
-                <li><a class="btn btn-primary" href="#">Musik&Video</a></li>
+            <!-- Nav tabs for children of global goal -->
+            <ul class="nav nav-tabs nav-justified nav-btns" style="display:inline-block; margin-top:50px;">
+                <li><a class="btn btn-primary" style="border-radius:1px; border-right-color:#4e4d4d;" href="#">Kunst</a></li>
+                <li><a class="btn btn-primary" style="border-radius:1px; border-right-color:#4e4d4d;" href="@Url.Action("Index", "ChildrensText", new { id = Model.GlobalGoal.Id})">Tekst</a></li>
+                <li><a class="btn btn-primary" style="border-radius:1px; border-right-color:#4e4d4d;" href="#">Landart</a></li>
+                <li><a class="btn btn-primary" style="border-radius:1px;" href="#">Musik&Video</a></li>
             </ul>
         </div>
     }
+    <a href="@Url.Action("Index", "Home")">Tilbage</a>
 </div>

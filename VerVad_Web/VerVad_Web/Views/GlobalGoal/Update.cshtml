@@ -1,7 +1,7 @@
 ﻿@model VerVad_Web.ViewModels.GlobalGoals.GlobalGoalCreateUpdate
 
 
-@using (Html.BeginForm("Update", "GlobalGoal"))
+@using (Html.BeginForm("Update", "GlobalGoal", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.GlobalGoal.TranslationId)

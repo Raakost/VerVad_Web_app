@@ -14,6 +14,9 @@ namespace ServiceGateways.Entities
         public string VideoURL { get; set; }
         public string SongArtist { get; set; }
         public string SongTitle { get; set; }
-        public Translation Translation { get; set; } 
+        public Translation Translation { get; set; }
+
+        public GlobalGoal GlobalGoal { get; set; }
+        public int GlobalGoalId { get; set; }
     }
 }
