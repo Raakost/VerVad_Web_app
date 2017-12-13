@@ -13,6 +13,11 @@
                 </div>
                 <div class="modal-body" style="background-color:#eeeeee;">
                     <div class="row">
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(x => x.LandArt.ImgUrl, new { @class = "form-control remove-border-radius", placeholder = "ImgUrl" })
+                        </div>
+                    </div>
+                    <div class="row">
                         @for (int i = 0; i < Model.Languages.Count; i++)
                         {
                             var lang = Model.Languages[i];
