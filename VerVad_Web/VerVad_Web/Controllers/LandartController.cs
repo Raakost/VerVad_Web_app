@@ -32,7 +32,7 @@ namespace VerVad_Web.Controllers
             vm.LandArt = new LandArt();
             vm.Languages = _languageGateway.ReadAll();
             TempData["toast"] = "Landart er oprettet!";
-            return PartialView("CreateUpdateLandArt", vm);
+            return PartialView("CreateUpdate", vm);
         }
 
         [HttpGet]
@@ -43,13 +43,13 @@ namespace VerVad_Web.Controllers
             vm.Languages = _languageGateway.ReadAll();
             vm.GlobalGoalId = vm.LandArt.GlobalGoalId;
             TempData["toast"] = "Dine ændringer er gemt!";
-            return PartialView("CreateUpdateLandArt", vm);
+            return PartialView("CreateUpdate", vm);
         }
 
         [HttpPost]
         public ActionResult Create(LandartCreateUpdate vm)
         {
-            var text = _gateway.Create(vm.LandArt);
+            var landart = _gateway.Create(vm.LandArt); 
             return RedirectToAction("Index", new { id = vm.LandArt.GlobalGoalId });
         }
 

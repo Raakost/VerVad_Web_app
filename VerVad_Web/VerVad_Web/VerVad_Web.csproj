@@ -291,7 +291,7 @@
     <Content Include="Views\ChildrensText\Index.cshtml" />
     <Content Include="Views\ChildrensText\CreateUpdate.cshtml" />
     <Content Include="Views\Landart\Index.cshtml" />
-    <Content Include="Views\Landart\CreateUpdateLandArt.cshtml" />
+    <Content Include="Views\Landart\CreateUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
