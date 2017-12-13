@@ -53,8 +53,8 @@
             {
                 var translation = item.Translation.TranslatedTexts.FirstOrDefault(x => x.LanguageISO == "da");
                 <tr>
-                    <td style="width: 20%;">                        
-                        <a href="" class="update-link" data-id="@item.Id">@item.ImgUrl</a>
+                    <td style="width: 20%;">
+                        <a href="" class="update-link" data-id="@item.Id"><img src="@item.ImgUrl" /></a>
                     </td>
                     <td style="width: auto;">@translation.Title</td>
                     <td style="width: auto;">@translation.Description</td>
