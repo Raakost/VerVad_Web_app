@@ -208,6 +208,7 @@
     <Compile Include="Controllers\FrontPageController.cs" />
     <Compile Include="Controllers\GlobalGoalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LandartController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -221,6 +222,8 @@
     <Compile Include="ViewModels\ChildrensTexts\ChildrensTextIndexModel.cs" />
     <Compile Include="ViewModels\FrontpageUpdate\FrontPageUpdateViewModel.cs" />
     <Compile Include="ViewModels\GlobalGoals\GlobalGoalCreateUpdate.cs" />
+    <Compile Include="ViewModels\Landart\LandartCreateUpdate.cs" />
+    <Compile Include="ViewModels\Landart\LandArtIndexModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -287,6 +290,8 @@
     <Content Include="Views\FrontPage\Update.cshtml" />
     <Content Include="Views\ChildrensText\Index.cshtml" />
     <Content Include="Views\ChildrensText\CreateUpdate.cshtml" />
+    <Content Include="Views\Landart\Index.cshtml" />
+    <Content Include="Views\Landart\CreateUpdateLandArt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

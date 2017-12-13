@@ -74,16 +74,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Entities\Artwork.cs" />
     <Compile Include="Entities\AudioVideo.cs" />
     <Compile Include="Entities\ChildrensText.cs" />
     <Compile Include="Entities\FrontPage.cs" />
     <Compile Include="Entities\GlobalGoal.cs" />
-    <Compile Include="Entities\GlobalGoalImage.cs" />
+    <Compile Include="Entities\LandArt.cs" />
     <Compile Include="Entities\Language.cs" />
     <Compile Include="Entities\Translation.cs" />
     <Compile Include="Entities\TranslationLanguage.cs" />
     <Compile Include="Facade\ServiceGatewayFacade.cs" />
     <Compile Include="Interfaces\IAuthorizationServiceGateway.cs" />
+    <Compile Include="Interfaces\IChildrensServiceGateway.cs" />
     <Compile Include="Interfaces\IChildrensTextServiceGateway.cs" />
     <Compile Include="Interfaces\ILanguageServiceGateway.cs" />
     <Compile Include="Interfaces\IFrontPageServiceGateway.cs" />
@@ -93,6 +95,7 @@
     <Compile Include="ServiceGateways\ChildrensTextServiceGateway.cs" />
     <Compile Include="ServiceGateways\FrontPageServiceGateway.cs" />
     <Compile Include="ServiceGateways\GlobalGoalServiceGateway.cs" />
+    <Compile Include="ServiceGateways\LandArtServiceGateway.cs" />
     <Compile Include="ServiceGateways\LanguageServiceGateway.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>

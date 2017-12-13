@@ -15,6 +15,7 @@ namespace ServiceGateways.Facade
         private ILanguageServiceGateway<Language> _languageGateway;
         private IFrontPageServiceGateway<FrontPage, int> _frontPageGateway;
         private IChildrensTextServiceGateway<ChildrensText, int> _childrensTextGateway;
+        private IChildrensServiceGateway<LandArt, int> _landArtGateway;
 
         public IServiceGateway<GlobalGoal, int> GetGlobalGoalServiceGateway()
         {
@@ -34,6 +35,11 @@ namespace ServiceGateways.Facade
         public IChildrensTextServiceGateway<ChildrensText, int> GetChildrensTextServiceGateway()
         {
             return _childrensTextGateway ?? (_childrensTextGateway = new ChildrensTextServiceGateway());
+        }
+
+        public IChildrensServiceGateway<LandArt, int> GetLandArtServiceGateway()
+        {
+            return _landArtGateway ?? (_landArtGateway = new LandArtServiceGateway());
         }
     }
 }

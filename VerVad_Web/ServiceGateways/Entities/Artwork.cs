@@ -6,24 +6,13 @@ using System.Threading.Tasks;
 
 namespace ServiceGateways.Entities
 {
-    public abstract class GlobalGoalImage
+    public class Artwork
     {
         public int Id { get; set; }
         public string ImgUrl { get; set; }
-        public string Artist { get; set; } 
+        public string Artist { get; set; }
         public Translation Translation { get; set; }
-
         public GlobalGoal GlobalGoal { get; set; }
         public int GlobalGoalId { get; set; }
-    }
-
-    public class LandArt : GlobalGoalImage
-    {
-
-    }    
-
-    public class Artwork : GlobalGoalImage
-    {
-
     }
 }
