@@ -1,12 +1,13 @@
 ﻿@model VerVad_Web.ViewModels.AudioVideos.AudioVideoCreateUpdate
 
-@using (Html.BeginForm(Model.IsCreate ? "Create" : "Update", "AudioVideo", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.AudioVideo.Id)
 
-    <div class="jumbotron sm-jumbo" style="padding-left:45px; padding-right:45px;">
-        @if (Model.IsCreate)
+<div class="jumbotron sm-jumbo" style="padding-left:45px; padding-right:45px; position:relative;">
+    @using (Html.BeginForm(Model.IsCreate ? "Create" : "Update", "AudioVideo", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.AudioVideo.Id)
+
+        if (Model.IsCreate)
         {
             <h4 style="margin-top:0px;">OPRET AUDIO OG VIDEO</h4>
         }
@@ -34,7 +35,7 @@
             @Html.EditorFor(model => model.AudioVideo.VideoURL, new { htmlAttributes = new { @class = "form-control remove-border-radius", required = "true" } })
             @Html.ValidationMessageFor(model => model.AudioVideo.VideoURL, "", new { @class = "text-danger" })
         </div>
-        @for (int i = 0; i < Model.Languages.Count; i++)
+        for (int i = 0; i < Model.Languages.Count; i++)
         {
             var lang = Model.Languages[i];
             var langText = Model.AudioVideo.Translation.TranslatedTexts.FirstOrDefault(x => x.TranslationId == Model.AudioVideo.TranslationId && x.LanguageISO == lang.ISO);
@@ -61,7 +62,13 @@
                 <span class="btn-label"><i class="glyphicon glyphicon-floppy-disk"></i></span>Gem & Fortsæt
             </button>
         </div>
-        <a href="@Url.Action("Update", "GlobalGoal", new { id = Model.AudioVideo.Id })">Tilbage</a>
-    </div>
-}
+    }
+    <a href="@Url.Action("Update", "GlobalGoal", new { id = Model.AudioVideo.Id })">Tilbage</a>
 
+    @using (Html.BeginForm("Delete", "AudioVideo", FormMethod.Post))
+    {   <input type="hidden" name="id" value="@Model.AudioVideo.Id" />
+    <button style="position: absolute; right: 205px; top: 487px;" type="submit" class="btn-sm btn-labeled btn-danger remove-border-radius-border">
+        <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Slet
+    </button>
+    }
+</div>

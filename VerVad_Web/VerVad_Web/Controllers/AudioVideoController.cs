@@ -24,7 +24,7 @@ namespace VerVad_Web.Controllers
             {
                 Id = gg_id
             };
-            vm.Languages = _languageServiceGateway.ReadAll();            
+            vm.Languages = _languageServiceGateway.ReadAll();
             vm.IsCreate = true;
             return View("CreateUpdate", vm);
         }
@@ -66,7 +66,7 @@ namespace VerVad_Web.Controllers
                 vm.AudioVideo = av;
                 vm.Languages = _languageServiceGateway.ReadAll();
 
-                return View("CreateUpdate" ,vm);
+                return View("CreateUpdate", vm);
             }
             catch (Exception e)
             {
@@ -78,7 +78,7 @@ namespace VerVad_Web.Controllers
         public ActionResult Update(AudioVideoCreateUpdate vm)
         {
             try
-            {                
+            {
                 if (ModelState.IsValid)
                 {
                     vm.AudioVideo = _gateway.Update(vm.AudioVideo);
@@ -96,6 +96,21 @@ namespace VerVad_Web.Controllers
             {
                 ModelState.AddModelError("error", e.Message);
                 return View("Update", vm);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                _gateway.Delete(id);
+                return RedirectToAction("Update", "GlobalGoal", new { id });
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("error", e.Message);
+                return RedirectToAction("Update", new { id });
             }
         }
     }
