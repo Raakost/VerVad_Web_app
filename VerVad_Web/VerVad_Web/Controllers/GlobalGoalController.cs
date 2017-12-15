@@ -75,8 +75,7 @@ namespace VerVad_Web.Controllers
         public ActionResult Update(GlobalGoalCreateUpdate vm)
         {
             try
-            {
-                var gg = new GlobalGoal();
+            {                
                 if (ModelState.IsValid)
                 {
                     vm.GlobalGoal = _GlobalGoalServiceGateway.Update(vm.GlobalGoal);

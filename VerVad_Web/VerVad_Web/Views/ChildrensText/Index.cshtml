@@ -60,6 +60,7 @@
                     <td style="width: 10%;">
                         @using (Html.BeginForm("Delete", "ChildrensText", FormMethod.Post))
                         {   <input type="hidden" name="id" value="@item.Id" />
+                        <input type="hidden" name="gg_id" value="@item.GlobalGoalId" />
                         <button type="submit" class="btn-sm btn-labeled btn-danger remove-border-radius-border">
                             <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Slet
                         </button>

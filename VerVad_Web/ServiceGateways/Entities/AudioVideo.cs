@@ -8,6 +8,11 @@ namespace ServiceGateways.Entities
 {
     public class AudioVideo
     {
+        public AudioVideo()
+        {
+            Translation = new Translation();
+        }
+
         public int Id { get; set; }
         public int TranslationId { get; set; }
         public string AudioURL { get; set; }
@@ -17,6 +22,5 @@ namespace ServiceGateways.Entities
         public Translation Translation { get; set; }
 
         public GlobalGoal GlobalGoal { get; set; }
-        public int GlobalGoalId { get; set; }
     }
 }

@@ -92,6 +92,8 @@
     <Compile Include="Interfaces\IServiceGateway.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceGateways\AbstractServiceGateway.cs" />
+    <Compile Include="ServiceGateways\ArtworkServiceGateway.cs" />
+    <Compile Include="ServiceGateways\AudioVideoServiceGateway.cs" />
     <Compile Include="ServiceGateways\ChildrensTextServiceGateway.cs" />
     <Compile Include="ServiceGateways\FrontPageServiceGateway.cs" />
     <Compile Include="ServiceGateways\GlobalGoalServiceGateway.cs" />
