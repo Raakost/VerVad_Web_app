@@ -47,6 +47,7 @@ namespace VerVad_Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(ArtworkCreateUpdate vm)
         {
             var aw = _gateway.Create(vm.Artwork);
@@ -54,6 +55,7 @@ namespace VerVad_Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Update(ArtworkCreateUpdate vm)
         {
             var aw = new LandArt();

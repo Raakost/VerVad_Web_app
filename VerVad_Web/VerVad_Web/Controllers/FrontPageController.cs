@@ -34,6 +34,7 @@ namespace VerVad_Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Update(FrontPageUpdateViewModel vm)
         {
             try

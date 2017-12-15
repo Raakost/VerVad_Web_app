@@ -48,6 +48,7 @@ namespace VerVad_Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(ChildrensTextCreateUpdate vm)
         {
             var text = _gateway.Create(vm.ChildrensText);
@@ -55,6 +56,7 @@ namespace VerVad_Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Update(ChildrensTextCreateUpdate vm)
         {
             var ct = new ChildrensText();

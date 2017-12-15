@@ -30,6 +30,7 @@ namespace VerVad_Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(AudioVideoCreateUpdate vm)
         {
             try
@@ -75,6 +76,7 @@ namespace VerVad_Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Update(AudioVideoCreateUpdate vm)
         {
             try

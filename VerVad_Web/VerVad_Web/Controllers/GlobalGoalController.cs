@@ -27,6 +27,7 @@ namespace VerVad_Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(GlobalGoalCreateUpdate vm)
         {
             try
@@ -72,6 +73,7 @@ namespace VerVad_Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Update(GlobalGoalCreateUpdate vm)
         {
             try

@@ -4,6 +4,7 @@
     <div class="modal-dialog" role="document" style="width: 1200px;">
         @using (Html.BeginForm(Model.LandArt.Id == 0 ? "Create" : "Update", "LandArt", FormMethod.Post))
         {
+            @Html.AntiForgeryToken()
             @Html.HiddenFor(x => x.LandArt.TranslationId)
             @Html.HiddenFor(x => x.LandArt.Translation.Id)
             @Html.HiddenFor(x => x.LandArt.Id)
