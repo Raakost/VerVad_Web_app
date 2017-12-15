@@ -49,7 +49,7 @@ namespace VerVad_Web.Controllers
         [HttpPost]
         public ActionResult Create(LandartCreateUpdate vm)
         {
-            var landart = _gateway.Create(vm.LandArt); 
+            var landart = _gateway.Create(vm.LandArt);
             return RedirectToAction("Index", new { id = vm.LandArt.GlobalGoalId });
         }
 
@@ -64,10 +64,10 @@ namespace VerVad_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id, int gg_id)
         {
             _gateway.Delete(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = gg_id });
         }
     }
 }
