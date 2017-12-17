@@ -1,0 +1,58 @@
+﻿@model  VerVad_Web.ViewModels.Artworks.ArtworkCreateUpdate
+
+<div class="modal fade" id="artwork" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="width: 1200px;">
+        @using (Html.BeginForm(Model.Artwork.Id == 0 ? "Create" : "Update", "Artwork", FormMethod.Post))
+            {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => x.Artwork.TranslationId)
+            @Html.HiddenFor(x => x.Artwork.Translation.Id)
+            @Html.HiddenFor(x => x.Artwork.Id)
+            <div class="modal-content" style="border-radius:1px;">
+                <div class="modal-header" style="background-color:#232322;">
+                    <h4 class="modal-title" style="color:white;" id="exampleModalLabel">OPRET KUNST</h4>
+                </div>
+                <div class="modal-body" style="background-color:#eeeeee;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(x => x.Artwork.ImgUrl, new { @class = "form-control remove-border-radius", placeholder = "ImgUrl" })
+                            @Html.TextBoxFor(x => x.Artwork.Artist, new { @class = "form-control remove-border-radius", placeholder = "Kunstner" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        @for (int i = 0; i < Model.Languages.Count; i++)
+                        {
+                            var lang = Model.Languages[i];
+                            var langText = Model.Artwork.Translation.TranslatedTexts.FirstOrDefault(x => x.TranslationId == Model.Artwork.TranslationId && x.LanguageISO == lang.ISO);
+                            if (langText == null)
+                            {
+                                langText = new ServiceGateways.Entities.TranslationLanguage();
+                            }
+                            <div class="col-md-4">
+                                <label>@lang.Country</label>
+                                <div style="padding-bottom: 3px">
+                                    <input type="hidden" name="Artwork.GlobalGoalId" value="@Model.GlobalGoalId" />
+                                    <input type="hidden" name="Artwork.Translation.TranslatedTexts[@i].LanguageISO" value="@lang.ISO" />
+                                    <input type="hidden" name="Artwork.Translation.TranslatedTexts[@i].TranslationId" value="@Model.Artwork.TranslationId" />
+
+                                    @Html.TextBox("Artwork.Translation.TranslatedTexts[" + i + "].Title", langText.Title, new { @class = "form-control remove-border-radius", required = "true", placeholder = "Titel" })
+                                    @Html.ValidationMessage("Artwork.Translation.TranslatedTexts[" + i + "].Title", "", new { @class = "text-danger" })
+                                    <div class="txt-area">
+                                        @Html.TextArea("Artwork.Translation.TranslatedTexts[" + i + "].Description", langText.Description, new { @class = "form-control remove-border-radius", required = "true", placeholder = "Beskrivelse" })
+                                        @Html.ValidationMessage("Artwork.Translation.TranslatedTexts[" + i + "].Description", "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="modal-footer" style="background-color:#eeeeee; margin-top:0px;">
+                    <button type="button" class="btn btn-warning remove-border-radius-border" data-dismiss="modal">Annuller</button>
+                    <button type="submit" class="btn btn-success remove-border-radius-border">Gem</button>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>

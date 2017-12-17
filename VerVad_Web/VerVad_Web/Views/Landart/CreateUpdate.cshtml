@@ -1,0 +1,57 @@
+﻿@model  VerVad_Web.ViewModels.Landart.LandartCreateUpdate
+
+<div class="modal fade" id="landArt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="width: 1200px;">
+        @using (Html.BeginForm(Model.LandArt.Id == 0 ? "Create" : "Update", "LandArt", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => x.LandArt.TranslationId)
+            @Html.HiddenFor(x => x.LandArt.Translation.Id)
+            @Html.HiddenFor(x => x.LandArt.Id)
+            <div class="modal-content" style="border-radius:1px;">
+                <div class="modal-header" style="background-color:#232322;">
+                    <h4 class="modal-title" style="color:white;" id="exampleModalLabel">OPRET LANDART</h4>
+                </div>
+                <div class="modal-body" style="background-color:#eeeeee;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(x => x.LandArt.ImgUrl, new { @class = "form-control remove-border-radius", placeholder = "ImgUrl" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        @for (int i = 0; i < Model.Languages.Count; i++)
+                        {
+                            var lang = Model.Languages[i];
+                            var langText = Model.LandArt.Translation.TranslatedTexts.FirstOrDefault(x => x.TranslationId == Model.LandArt.TranslationId && x.LanguageISO == lang.ISO);
+                            if (langText == null)
+                            {
+                                langText = new ServiceGateways.Entities.TranslationLanguage();
+                            }
+                            <div class="col-md-4">
+                                <label>@lang.Country</label>
+                                <div style="padding-bottom: 3px">
+                                    <input type="hidden" name="LandArt.GlobalGoalId" value="@Model.GlobalGoalId" />
+                                    <input type="hidden" name="LandArt.Translation.TranslatedTexts[@i].LanguageISO" value="@lang.ISO" />
+                                    <input type="hidden" name="LandArt.Translation.TranslatedTexts[@i].TranslationId" value="@Model.LandArt.TranslationId" />
+
+                                    @Html.TextBox("LandArt.Translation.TranslatedTexts[" + i + "].Title", langText.Title, new { @class = "form-control remove-border-radius", required = "true", placeholder = "Titel" })
+                                    @Html.ValidationMessage("LandArt.Translation.TranslatedTexts[" + i + "].Title", "", new { @class = "text-danger" })
+                                    <div class="txt-area">
+                                        @Html.TextArea("LandArt.Translation.TranslatedTexts[" + i + "].Description", langText.Description, new { @class = "form-control remove-border-radius", required = "true", placeholder = "Beskrivelse" })
+                                        @Html.ValidationMessage("LandArt.Translation.TranslatedTexts[" + i + "].Description", "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+               
+                <div class="modal-footer" style="background-color:#eeeeee; margin-top:0px;">
+                    <button type="button" class="btn btn-warning remove-border-radius-border" data-dismiss="modal">Annuller</button>
+                    <button type="submit" class="btn btn-success remove-border-radius-border">Gem</button>
+                </div>
+            </div>
+            
+        }
+    </div>
+</div>

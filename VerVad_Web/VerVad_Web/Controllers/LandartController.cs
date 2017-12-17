@@ -6,20 +6,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using VerVad_Web.ViewModels.Artworks;
+using VerVad_Web.ViewModels.Landart;
 
 namespace VerVad_Web.Controllers
 {
-    public class ArtworkController : Controller
+    public class LandartController : Controller
     {
         private ILanguageServiceGateway<Language> _languageGateway = new ServiceGatewayFacade().GetLanguageServiceGateway();
-        private IChildrensServiceGateway<Artwork, int> _gateway = new ServiceGatewayFacade().GetArtworkServiceGateway();
+        private IChildrensServiceGateway<LandArt, int> _gateway = new ServiceGatewayFacade().GetLandArtServiceGateway();
 
         [HttpGet]
         public ActionResult Index(int id)
         {
-            var vm = new ArtworkIndexModel();
-            vm.Artworks = _gateway.GetAllInstances(id);
+            var vm = new LandArtIndexModel();
+            vm.LandArts = _gateway.GetAllInstances(id);
             vm.GlobalGoalId = id;
             return View(vm);
         }
@@ -27,41 +27,41 @@ namespace VerVad_Web.Controllers
         [HttpGet]
         public ActionResult Create(int gg_id)
         {
-            var vm = new ArtworkCreateUpdate();
+            var vm = new LandartCreateUpdate();
             vm.GlobalGoalId = gg_id;
-            vm.Artwork = new Artwork();
+            vm.LandArt = new LandArt();
             vm.Languages = _languageGateway.ReadAll();
-            TempData["toast"] = "Artwork er oprettet!";
+            TempData["toast"] = "Landart er oprettet!";
             return PartialView("CreateUpdate", vm);
         }
 
         [HttpGet]
         public ActionResult Update(int id)
         {
-            var vm = new ArtworkCreateUpdate();
-            vm.Artwork = _gateway.Read(id);
+            var vm = new LandartCreateUpdate();
+            vm.LandArt = _gateway.Read(id);
             vm.Languages = _languageGateway.ReadAll();
-            vm.GlobalGoalId = vm.Artwork.GlobalGoalId;
+            vm.GlobalGoalId = vm.LandArt.GlobalGoalId;
             TempData["toast"] = "Dine ændringer er gemt!";
             return PartialView("CreateUpdate", vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ArtworkCreateUpdate vm)
+        public ActionResult Create(LandartCreateUpdate vm)
         {
-            var aw = _gateway.Create(vm.Artwork);
-            return RedirectToAction("Index", new { id = vm.Artwork.GlobalGoalId });
+            var landart = _gateway.Create(vm.LandArt);
+            return RedirectToAction("Index", new { id = vm.LandArt.GlobalGoalId });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(ArtworkCreateUpdate vm)
+        public ActionResult Update(LandartCreateUpdate vm)
         {
-            var aw = new LandArt();
+            var la = new LandArt();
             {
-                vm.Artwork = _gateway.Update(vm.Artwork);
-                return RedirectToAction("Index", new { id = vm.Artwork.GlobalGoalId });
+                vm.LandArt = _gateway.Update(vm.LandArt);
+                return RedirectToAction("Index", new { id = vm.LandArt.GlobalGoalId });
             }
         }
 

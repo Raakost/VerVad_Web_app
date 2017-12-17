@@ -16,6 +16,10 @@ namespace ServiceGateways.Facade
         private IFrontPageServiceGateway<FrontPage, int> _frontPageGateway;
         private IChildrensTextServiceGateway<ChildrensText, int> _childrensTextGateway;
         private IAuthorizationServiceGateway _authGateway;
+        private IChildrensServiceGateway<LandArt, int> _landArtGateway;
+        private IChildrensServiceGateway<Artwork, int> _artworkGateway;
+        private IChildrensServiceGateway<AudioVideo, int> _audioVideoGateway; 
+
 
         public IServiceGateway<GlobalGoal, int> GetGlobalGoalServiceGateway()
         {
@@ -35,6 +39,21 @@ namespace ServiceGateways.Facade
         public IChildrensTextServiceGateway<ChildrensText, int> GetChildrensTextServiceGateway()
         {
             return _childrensTextGateway ?? (_childrensTextGateway = new ChildrensTextServiceGateway());
+        }
+
+        public IChildrensServiceGateway<LandArt, int> GetLandArtServiceGateway()
+        {
+            return _landArtGateway ?? (_landArtGateway = new LandArtServiceGateway());
+        }
+
+        public IChildrensServiceGateway<Artwork, int> GetArtworkServiceGateway()
+        {
+            return _artworkGateway ?? (_artworkGateway = new ArtworkServiceGateway());
+        }
+
+        public IChildrensServiceGateway<AudioVideo, int> GetAudioVideoServiceGateway()
+        {
+            return _audioVideoGateway ?? (_audioVideoGateway = new AudioVideoServiceGateway());
         }
 
         public IAuthorizationServiceGateway GetAuthGateway()

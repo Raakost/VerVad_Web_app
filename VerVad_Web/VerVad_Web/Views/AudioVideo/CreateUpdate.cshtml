@@ -1,0 +1,74 @@
+﻿@model VerVad_Web.ViewModels.AudioVideos.AudioVideoCreateUpdate
+
+
+<div class="jumbotron sm-jumbo" style="padding-left:45px; padding-right:45px; position:relative;">
+    @using (Html.BeginForm(Model.IsCreate ? "Create" : "Update", "AudioVideo", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.AudioVideo.Id)
+
+        if (Model.IsCreate)
+        {
+            <h4 style="margin-top:0px;">OPRET AUDIO OG VIDEO</h4>
+        }
+        else
+        {
+            <h4 style="margin-top:0px;">REDIGER AUDIO OG VIDEO</h4>
+            @Html.HiddenFor(model => model.AudioVideo.TranslationId)
+        }
+        <hr style="border: 0.5px solid black;" />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.AudioVideo.AudioURL, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.AudioVideo.AudioURL, new { htmlAttributes = new { @class = "form-control remove-border-radius", required = "true" } })
+            @Html.ValidationMessageFor(model => model.AudioVideo.AudioURL, "", new { @class = "text-danger" })
+
+            @Html.LabelFor(model => model.AudioVideo.SongArtist, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.AudioVideo.SongArtist, new { htmlAttributes = new { @class = "form-control remove-border-radius", required = "true" } })
+            @Html.ValidationMessageFor(model => model.AudioVideo.SongArtist, "", new { @class = "text-danger" })
+
+            @Html.LabelFor(model => model.AudioVideo.SongTitle, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.AudioVideo.SongTitle, new { htmlAttributes = new { @class = "form-control remove-border-radius", required = "true" } })
+            @Html.ValidationMessageFor(model => model.AudioVideo.SongTitle, "", new { @class = "text-danger" })
+
+            @Html.LabelFor(model => model.AudioVideo.VideoURL, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.AudioVideo.VideoURL, new { htmlAttributes = new { @class = "form-control remove-border-radius", required = "true" } })
+            @Html.ValidationMessageFor(model => model.AudioVideo.VideoURL, "", new { @class = "text-danger" })
+        </div>
+        for (int i = 0; i < Model.Languages.Count; i++)
+        {
+            var lang = Model.Languages[i];
+            var langText = Model.AudioVideo.Translation.TranslatedTexts.FirstOrDefault(x => x.TranslationId == Model.AudioVideo.TranslationId && x.LanguageISO == lang.ISO);
+            if (langText == null)
+            {
+                langText = new ServiceGateways.Entities.TranslationLanguage();
+            }
+            <div class="form-horizontal col-md-3">
+                <label>@lang.Country</label>
+                <div style="padding-bottom: 3px">
+                    <input type="hidden" name="AudioVideo.Translation.TranslatedTexts[@i].LanguageISO" value="@lang.ISO" />
+                    <input type="hidden" name="AudioVideo.Translation.TranslatedTexts[@i].TranslationId" value="@Model.AudioVideo.TranslationId" />
+                    @Html.TextBox("AudioVideo.Translation.TranslatedTexts[" + i + "].Title", langText.Title, new { @class = "form-control remove-border-radius", required = "true", placeholder = "Titel" })
+                    @Html.ValidationMessage("AudioVideo.Translation.TranslatedTexts[" + i + "].Title", "", new { @class = "text-danger" })
+                    <div class="txt-area">
+                        @Html.TextArea("AudioVideo.Translation.TranslatedTexts[" + i + "].Description", langText.Description, new { @class = "form-control remove-border-radius", required = "true", placeholder = "Beskrivelse" })
+                        @Html.ValidationMessage("AudioVideo.Translation.TranslatedTexts[" + i + "].Description", "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="form-horizontal" align="right">
+            <button type="submit" class="btn-sm btn-labeled btn-success remove-border-radius-border" style="margin-top: 15px; margin-right: 15px;">
+                <span class="btn-label"><i class="glyphicon glyphicon-floppy-disk"></i></span>Gem & Fortsæt
+            </button>
+        </div>
+    }
+    <a href="@Url.Action("Update", "GlobalGoal", new { id = Model.AudioVideo.Id })">Tilbage</a>
+
+    @using (Html.BeginForm("Delete", "AudioVideo", FormMethod.Post))
+    {   <input type="hidden" name="id" value="@Model.AudioVideo.Id" />
+    <button style="position: absolute; right: 205px; top: 487px;" type="submit" class="btn-sm btn-labeled btn-danger remove-border-radius-border">
+        <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Slet
+    </button>
+    }
+</div>

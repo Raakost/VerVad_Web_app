@@ -30,7 +30,7 @@
     </script>
 }
 <div class="jumbotron sm-jumbo">
-    <h4 style="margin-top:0px;">BØRNS TEKSTER</h4>
+    <h4 style="margin-top:0px;">OVERSIGT - BØRNS TEKSTER</h4>
     <div class="edit-btns" style="display:block" align="right">
         <!-- Button trigger modal -->
         <button id="createButton" type="button" class="btn-sm btn-labeled btn-primary remove-border-radius-border">
@@ -44,7 +44,7 @@
                 <th>Forfatter</th>
                 <th>Titel</th>
                 <th>Tekst</th>
-                <th></th>
+                <th>@*tom header til delete knap*@</th>
             </tr>
         </thead>
         <tbody>
@@ -60,6 +60,7 @@
                     <td style="width: 10%;">
                         @using (Html.BeginForm("Delete", "ChildrensText", FormMethod.Post))
                         {   <input type="hidden" name="id" value="@item.Id" />
+                        <input type="hidden" name="gg_id" value="@item.GlobalGoalId" />
                         <button type="submit" class="btn-sm btn-labeled btn-danger remove-border-radius-border">
                             <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Slet
                         </button>

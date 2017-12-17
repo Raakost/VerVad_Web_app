@@ -48,6 +48,7 @@ namespace VerVad_Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(ChildrensTextCreateUpdate vm)
         {
             var text = _gateway.Create(vm.ChildrensText);
@@ -55,6 +56,7 @@ namespace VerVad_Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Update(ChildrensTextCreateUpdate vm)
         {
             var ct = new ChildrensText();
@@ -66,10 +68,10 @@ namespace VerVad_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id, int gg_id)
         {
             _gateway.Delete(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = gg_id });
         }
     }
 }

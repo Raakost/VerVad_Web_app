@@ -1,15 +1,15 @@
-﻿@model VerVad_Web.ViewModels.Artworks.ArtworkIndexModel
+﻿@model VerVad_Web.ViewModels.Landart.LandArtIndexModel
 
 @section scripts {
     <script>
         $(function () {
-            $("#createArtworkButton").click(function () {
+            $("#createLandArtButton").click(function () {
                 $.ajax({
                     url: "@Url.Action("Create")?gg_id=@Model.GlobalGoalId",
                     method: "get",
                 success: function (data) {
-                    $("#artworkModalContainer").empty().append(data);
-                    $("#artwork").modal();
+                    $("#landArtModalContainer").empty().append(data);
+                    $("#landArt").modal();
                 }
             });
        });
@@ -21,8 +21,8 @@
                   url: "@Url.Action("Update")?id=" + id,
                   method: "get",
                 success: function (data) {
-                    $("#artworkModalContainer").empty().append(data);
-                    $("#artwork").modal();
+                    $("#landArtModalContainer").empty().append(data);
+                    $("#landArt").modal();
                 }
             });
         });
@@ -31,10 +31,10 @@
     </script>
 }
 <div class="jumbotron sm-jumbo">
-    <h4 style="margin-top:0px;">OVERSIGT - BØRNS KUNSTVÆRKER</h4>
+    <h4 style="margin-top:0px;">OVERSIGT - LANDART</h4>
     <div class="edit-btns" style="display:block" align="right">
         <!-- Button trigger modal -->
-        <button id="createArtworkButton" type="button" class="btn-sm btn-labeled btn-primary remove-border-radius-border">
+        <button id="createLandArtButton" type="button" class="btn-sm btn-labeled btn-primary remove-border-radius-border">
             <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Tilføj ny
         </button>
     </div>
@@ -49,7 +49,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Artworks)
+            @foreach (var item in Model.LandArts)
             {
                 var translation = item.Translation.TranslatedTexts.FirstOrDefault(x => x.LanguageISO == "da");
                 <tr>
@@ -59,7 +59,7 @@
                     <td style="width: auto;">@translation.Title</td>
                     <td style="width: auto;">@translation.Description</td>
                     <td style="width: 10%;">
-                        @using (Html.BeginForm("Delete", "Artwork", FormMethod.Post))
+                        @using (Html.BeginForm("Delete", "Landart", FormMethod.Post))
                         {   <input type="hidden" name="id" value="@item.Id" />
                         <input type="hidden" name="gg_id" value="@item.GlobalGoalId" />
                         <button type="submit" class="btn-sm btn-labeled btn-danger remove-border-radius-border">
@@ -75,4 +75,4 @@
     <a href="@Url.Action("Update", "GlobalGoal", new { id = Model.GlobalGoalId })">Tilbage</a>
 </div>
 
-<div id="artworkModalContainer"></div>
+<div id="landArtModalContainer"></div>
