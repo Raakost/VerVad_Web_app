@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using VerVad_Web.DataAnnotations;
 
 namespace VerVad_Web.Controllers
 {
@@ -14,6 +15,7 @@ namespace VerVad_Web.Controllers
         private IServiceGateway<GlobalGoal, int> _gateway = new ServiceGatewayFacade().GetGlobalGoalServiceGateway();
 
         [HttpGet]
+        [LoginRequired]
         public ActionResult Index()
         {
             return View(_gateway.ReadAll());

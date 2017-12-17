@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -8,6 +10,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using ServiceGateways.Facade;
+using ServiceGateways.Interfaces;
+using ServiceGateways.ServiceGateways;
 using VerVad_Web.Models;
 
 namespace VerVad_Web.Controllers
@@ -17,6 +22,7 @@ namespace VerVad_Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IAuthorizationServiceGateway _authMgr = new AuthorizationServiceGateway();
 
         public AccountController()
         {
@@ -73,23 +79,23 @@ namespace VerVad_Web.Controllers
                 return View(model);
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            if (ModelState.IsValid)
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                HttpResponseMessage response = _authMgr.Login(model.Email, model.Password);
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    if (Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    return RedirectToAction("Index", "Home", new { });
+                }
+                ModelState.AddModelError("", "Invalid login attempt!");
+
             }
+            return View(model);
         }
+    
 
         //
         // GET: /Account/VerifyCode

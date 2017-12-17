@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace ServiceGateways.Interfaces
 {
-    interface IAuthorizationServiceGateway
+    public interface IAuthorizationServiceGateway
     {
         HttpResponseMessage Login(string userName, string password);
-        HttpResponseMessage Register(User user);
 
     }
 }
