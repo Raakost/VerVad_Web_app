@@ -14,6 +14,7 @@ namespace ServiceGateways.ServiceGateways
         //Create
         public ChildrensText Create(ChildrensText t)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.PostAsJsonAsync("api/ChildrensText", t).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -25,6 +26,7 @@ namespace ServiceGateways.ServiceGateways
         //Read from global goal id
         public List<ChildrensText> GetTextsFromGlobalGoal(int gg_id)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync($"api/ChildrensText/GetTextsFromGlobalGoal/{gg_id}").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -39,6 +41,7 @@ namespace ServiceGateways.ServiceGateways
         //Read
         public ChildrensText Read(int id)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync($"api/childrensText/{id}").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -53,6 +56,7 @@ namespace ServiceGateways.ServiceGateways
         //ReadAll
         public List<ChildrensText> ReadAll()
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync($"api/ChildrensText").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -67,6 +71,7 @@ namespace ServiceGateways.ServiceGateways
         //Update
         public ChildrensText Update(ChildrensText t)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.PutAsJsonAsync($"api/ChildrensText", t).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -81,6 +86,7 @@ namespace ServiceGateways.ServiceGateways
         //Delete
         public bool Delete(int id)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.DeleteAsync($"api/ChildrensText/{id}").Result;
             if (response.IsSuccessStatusCode)
             {

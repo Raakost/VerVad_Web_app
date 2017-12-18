@@ -7,10 +7,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using VerVad_Web.DataAnnotations;
 using VerVad_Web.ViewModels.AudioVideos;
 
 namespace VerVad_Web.Controllers
 {
+    [LoginRequired]
     public class AudioVideoController : Controller
     {
         private ILanguageServiceGateway<Language> _languageServiceGateway = new ServiceGatewayFacade().GetLanguageServiceGateway();

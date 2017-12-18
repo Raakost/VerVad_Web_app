@@ -6,10 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using VerVad_Web.DataAnnotations;
 using VerVad_Web.ViewModels.FrontPageUpdate;
 
 namespace VerVad_Web.Controllers
 {
+    [LoginRequired]
     public class FrontPageController : Controller
     {
         private IFrontPageServiceGateway<FrontPage, int> _frontPageServiceGateway = new ServiceGatewayFacade().GetFrontPageServiceGateway();

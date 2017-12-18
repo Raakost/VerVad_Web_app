@@ -2,10 +2,7 @@
 using ServiceGateways.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServiceGateways.ServiceGateways
 {
@@ -14,6 +11,7 @@ namespace ServiceGateways.ServiceGateways
         //Create
         public Artwork Create(Artwork t)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.PostAsJsonAsync("api/Artwork", t).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -25,6 +23,7 @@ namespace ServiceGateways.ServiceGateways
         //Read from global goal id
         public List<Artwork> GetAllInstances(int gg_id)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync($"api/Artwork/GetArtworksFromGlobalGoal/{gg_id}").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -39,6 +38,7 @@ namespace ServiceGateways.ServiceGateways
         //Read
         public Artwork Read(int id)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync($"api/Artwork/{id}").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -53,6 +53,7 @@ namespace ServiceGateways.ServiceGateways
         //ReadAll
         public List<Artwork> ReadAll()
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync($"api/Artwork").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -67,6 +68,7 @@ namespace ServiceGateways.ServiceGateways
         //Update
         public Artwork Update(Artwork t)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.PutAsJsonAsync($"api/Artwork", t).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -81,6 +83,7 @@ namespace ServiceGateways.ServiceGateways
         //Delete
         public bool Delete(int id)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.DeleteAsync($"api/Artwork/{id}").Result;
             if (response.IsSuccessStatusCode)
             {

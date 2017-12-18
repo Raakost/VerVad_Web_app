@@ -14,6 +14,7 @@ namespace ServiceGateways.ServiceGateways
         //Read
         public FrontPage Read(int id)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync($"api/FrontPage/{id}").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -28,6 +29,7 @@ namespace ServiceGateways.ServiceGateways
         //Update
         public FrontPage Update(FrontPage t)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.PutAsJsonAsync($"api/FrontPage", t).Result;
             if (response.IsSuccessStatusCode)
             {

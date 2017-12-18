@@ -14,6 +14,7 @@ namespace ServiceGateways.ServiceGateways
         //Create
         public LandArt Create(LandArt t)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.PostAsJsonAsync("api/LandArt", t).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -25,6 +26,7 @@ namespace ServiceGateways.ServiceGateways
         //Delete
         public bool Delete(int id)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.DeleteAsync($"api/LandArt/{id}").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -36,6 +38,7 @@ namespace ServiceGateways.ServiceGateways
         //Read from Global goal id
         public List<LandArt> GetAllInstances(int gg_id)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync($"api/Landart/GetLandartFromGlobalGoal/{gg_id}").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -50,6 +53,7 @@ namespace ServiceGateways.ServiceGateways
         //Read
         public LandArt Read(int id)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync($"api/LandArt/{id}").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -64,6 +68,7 @@ namespace ServiceGateways.ServiceGateways
         //ReadAll
         public List<LandArt> ReadAll()
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync($"api/LandArt").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -78,6 +83,7 @@ namespace ServiceGateways.ServiceGateways
         //Update
         public LandArt Update(LandArt t)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.PutAsJsonAsync($"api/LandArt", t).Result;
             if (response.IsSuccessStatusCode)
             {

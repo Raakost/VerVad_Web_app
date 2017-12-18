@@ -8,9 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using VerVad_Web.ViewModels.GlobalGoals;
 using ServiceGateways.ServiceGateways;
+using VerVad_Web.DataAnnotations;
 
 namespace VerVad_Web.Controllers
 {
+    [LoginRequired]
     public class GlobalGoalController : Controller
     {
         private IServiceGateway<GlobalGoal, int> _GlobalGoalServiceGateway = new ServiceGatewayFacade().GetGlobalGoalServiceGateway();

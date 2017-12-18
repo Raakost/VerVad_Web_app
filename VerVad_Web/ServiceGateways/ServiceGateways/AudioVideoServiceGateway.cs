@@ -14,6 +14,7 @@ namespace ServiceGateways.ServiceGateways
         //Create
         public AudioVideo Create(AudioVideo t)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.PostAsJsonAsync("api/AudioVideo", t).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -25,6 +26,7 @@ namespace ServiceGateways.ServiceGateways
         //Delete
         public bool Delete(int id)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.DeleteAsync($"api/AudioVideo/{id}").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -42,6 +44,7 @@ namespace ServiceGateways.ServiceGateways
         //Read
         public AudioVideo Read(int id)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync($"api/AudioVideo/{id}").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -62,6 +65,7 @@ namespace ServiceGateways.ServiceGateways
         //Update
         public AudioVideo Update(AudioVideo t)
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.PutAsJsonAsync($"api/AudioVideo", t).Result;
             if (response.IsSuccessStatusCode)
             {

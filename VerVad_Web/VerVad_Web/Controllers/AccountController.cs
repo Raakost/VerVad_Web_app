@@ -14,10 +14,11 @@ using ServiceGateways.Facade;
 using ServiceGateways.Interfaces;
 using ServiceGateways.ServiceGateways;
 using VerVad_Web.Models;
+using VerVad_Web.DataAnnotations;
 
 namespace VerVad_Web.Controllers
 {
-    [Authorize]
+    [LoginRequired]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;

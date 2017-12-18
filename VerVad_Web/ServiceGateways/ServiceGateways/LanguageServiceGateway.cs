@@ -13,6 +13,7 @@ namespace ServiceGateways.ServiceGateways
     {
         public List<Language> ReadAll()
         {
+            AddAuthorizationHeader();
             HttpResponseMessage response = Client.GetAsync($"api/Language").Result;
             if (response.IsSuccessStatusCode)
             {

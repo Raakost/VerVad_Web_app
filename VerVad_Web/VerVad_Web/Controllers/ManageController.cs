@@ -7,10 +7,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using VerVad_Web.Models;
+using VerVad_Web.DataAnnotations;
 
 namespace VerVad_Web.Controllers
 {
-    [Authorize]
+    [LoginRequired]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;

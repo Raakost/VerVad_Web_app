@@ -10,12 +10,12 @@ using VerVad_Web.DataAnnotations;
 
 namespace VerVad_Web.Controllers
 {
+    [LoginRequired]
     public class HomeController : Controller
     {
         private IServiceGateway<GlobalGoal, int> _gateway = new ServiceGatewayFacade().GetGlobalGoalServiceGateway();
 
         [HttpGet]
-        [LoginRequired]
         public ActionResult Index()
         {
             return View(_gateway.ReadAll());
