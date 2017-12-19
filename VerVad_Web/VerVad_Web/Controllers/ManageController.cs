@@ -11,7 +11,7 @@ using VerVad_Web.DataAnnotations;
 
 namespace VerVad_Web.Controllers
 {
-    [LoginRequired]
+    //[LoginRequired]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
