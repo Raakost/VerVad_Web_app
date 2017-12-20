@@ -15,8 +15,8 @@ namespace VerVad_Web.Controllers
     [LoginRequired]
     public class ChildrensTextController : Controller
     {
-        private ILanguageServiceGateway<Language> _languageServiceGateway = new ServiceGatewayFacade().GetLanguageServiceGateway();
-        private IChildrensTextServiceGateway<ChildrensText, int> _gateway = new ServiceGatewayFacade().GetChildrensTextServiceGateway();
+        private readonly ILanguageServiceGateway<Language> _languageServiceGateway = new ServiceGatewayFacade().GetLanguageServiceGateway();
+        private readonly IChildrensTextServiceGateway<ChildrensText, int> _gateway = new ServiceGatewayFacade().GetChildrensTextServiceGateway();
 
         [HttpGet]
         public ActionResult Index(int id)

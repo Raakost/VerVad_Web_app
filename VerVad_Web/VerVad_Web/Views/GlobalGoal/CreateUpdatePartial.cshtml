@@ -7,7 +7,7 @@
     }
     else
     {
-        <h4 style="margin-top:0px;">REDIGER VERDENSMÅL</h4>
+        <h4 style="margin-top:0px;">REDIGER VERDENSMÅL </h4>
     }
     <hr style="border: 0.5px solid black;" />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -21,12 +21,22 @@
         @Html.ValidationMessageFor(model => model.GlobalGoal.Longitude, "", new { @class = "text-danger" })
 
         @Html.LabelFor(model => model.GlobalGoal.ImgURL, htmlAttributes: new { @class = "control-label" })
-        @Html.EditorFor(model => model.GlobalGoal.ImgURL, new { htmlAttributes = new { @class = "form-control remove-border-radius", required = "true" } })
-        @Html.ValidationMessageFor(model => model.GlobalGoal.ImgURL, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.GlobalGoal.ImgURL, new { htmlAttributes = new { @class = "form-control remove-border-radius", required = "true" } })
+            @Html.ValidationMessageFor(model => model.GlobalGoal.ImgURL, "", new { @class = "text-danger" })
 
-        <button type="button" class="btn-sm btn-labeled btn-primary remove-border-radius-border" style="margin-top: 15px;">
-            <span class="btn-label"><i class="glyphicon glyphicon-picture"></i></span>Tilføj Billede
-        </button>
+        @*<button type="button" class="btn-sm btn-labeled btn-primary remove-border-radius-border" style="margin-top: 15px;">
+                <span class="btn-label"><i class="glyphicon glyphicon-picture"></i></span>Tilføj Billede
+            </button>*@
+        @Html.DropDownListFor(model => model.GlobalGoal.CloudinaryFolderPath, new SelectList(Model.Folders, "Path", "Name", Model.GlobalGoal.CloudinaryFolderPath))
+        @*<div class="dropdown" style="top:7px;">
+            <button class="btn-sm btn-primary remove-border-radius-border dropdown-toggle" type="button" id="gg-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Vælg Verdensmål
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="gg-dropdown">
+                <li><a href="#">Action</a></li>                        
+            </ul>
+        </div>*@
         <img class="col-md-12" src="@Model.GlobalGoal.ImgURL" style="padding:0px; margin-top:15px; max-height: 165px;" />
     </div>
     @for (int i = 0; i < Model.Languages.Count; i++)

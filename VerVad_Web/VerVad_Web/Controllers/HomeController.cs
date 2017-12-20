@@ -7,13 +7,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using VerVad_Web.DataAnnotations;
+using VerVad_Web.Helpers;
 
 namespace VerVad_Web.Controllers
 {
     [LoginRequired]
     public class HomeController : Controller
     {
-        private IServiceGateway<GlobalGoal, int> _gateway = new ServiceGatewayFacade().GetGlobalGoalServiceGateway();
+        private readonly IServiceGateway<GlobalGoal, int> _gateway = new ServiceGatewayFacade().GetGlobalGoalServiceGateway();
 
         [HttpGet]
         public ActionResult Index()
@@ -24,6 +25,7 @@ namespace VerVad_Web.Controllers
         public ActionResult TogglePublished(int id)
         {
             var gg = _gateway.Read(id);
+            
             if (gg.IsPublished)
             {
                 gg.IsPublished = false;
@@ -31,9 +33,21 @@ namespace VerVad_Web.Controllers
             }
             else
             {
-                gg.IsPublished = true;
-                TempData["toast"] = "Verdensmålet er nu synligt i appen!";
+                if (gg.Artworks.Any()
+                    || gg.LandArts.Any()
+                    || gg.ChildrensTexts.Any()
+                    || gg.AudioVideo == null)
+                {
+                    gg.IsPublished = true;
+                    TempData["toast"] = "Verdensmålet er nu synligt i appen, men mangelfuldt!";
+                }
+                else
+                {
+                    gg.IsPublished = true;
+                    TempData["toast"] = "Verdensmålet er nu synligt i appen!";
+                }                
             }
+           
             _gateway.Update(gg);
             return RedirectToAction("Index");
         }

@@ -15,8 +15,8 @@ namespace VerVad_Web.Controllers
     [LoginRequired]
     public class AudioVideoController : Controller
     {
-        private ILanguageServiceGateway<Language> _languageServiceGateway = new ServiceGatewayFacade().GetLanguageServiceGateway();
-        private AudioVideoServiceGateway _gateway = (AudioVideoServiceGateway)new ServiceGatewayFacade().GetAudioVideoServiceGateway();
+        private readonly ILanguageServiceGateway<Language> _languageServiceGateway = new ServiceGatewayFacade().GetLanguageServiceGateway();
+        private readonly AudioVideoServiceGateway _gateway = (AudioVideoServiceGateway)new ServiceGatewayFacade().GetAudioVideoServiceGateway();
 
         [HttpGet]
         public ActionResult Create(int gg_id)

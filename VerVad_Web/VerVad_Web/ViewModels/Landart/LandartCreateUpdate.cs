@@ -8,6 +8,10 @@ namespace VerVad_Web.ViewModels.Landart
 {
     public class LandartCreateUpdate
     {
+        public LandartCreateUpdate()
+        {
+            Languages = new List<Language>();
+        }
         public LandArt LandArt { get; set; }
         public List<Language> Languages { get; set; }
         public int GlobalGoalId { get; set; }

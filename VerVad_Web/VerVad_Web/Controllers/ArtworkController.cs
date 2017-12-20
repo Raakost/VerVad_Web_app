@@ -1,6 +1,7 @@
 ﻿using ServiceGateways.Entities;
 using ServiceGateways.Facade;
 using ServiceGateways.Interfaces;
+using ServiceGateways.ServiceGateways;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,9 @@ namespace VerVad_Web.Controllers
     [LoginRequired]
     public class ArtworkController : Controller
     {
-        private ILanguageServiceGateway<Language> _languageGateway = new ServiceGatewayFacade().GetLanguageServiceGateway();
-        private IChildrensServiceGateway<Artwork, int> _gateway = new ServiceGatewayFacade().GetArtworkServiceGateway();
+        private readonly ILanguageServiceGateway<Language> _languageGateway = new ServiceGatewayFacade().GetLanguageServiceGateway();
+        private readonly IChildrensServiceGateway<Artwork, int> _gateway = new ServiceGatewayFacade().GetArtworkServiceGateway();
+        private readonly CloudinaryServiceGateway _cloudinaryServiceGateway = new CloudinaryServiceGateway();
 
         [HttpGet]
         public ActionResult Index(int id)

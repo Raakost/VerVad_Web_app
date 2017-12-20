@@ -8,6 +8,11 @@ namespace VerVad_Web.ViewModels.Landart
 {
     public class LandArtIndexModel
     {
+        public LandArtIndexModel()
+        {
+            LandArts = new List<LandArt>();
+        }
+
         public List<LandArt> LandArts { get; set; }
         public int GlobalGoalId { get; set; }
     }

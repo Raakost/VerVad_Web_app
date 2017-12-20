@@ -12,6 +12,9 @@ namespace ServiceGateways.Entities
         public GlobalGoal()
         {
             Translation = new Translation();
+            Artworks = new List<Artwork>();
+            LandArts = new List<LandArt>();
+            ChildrensTexts = new List<ChildrensText>();
         }
         public int Id { get; set; }
         public double? Latitude { get; set; }
@@ -20,13 +23,13 @@ namespace ServiceGateways.Entities
 
         public AudioVideo AudioVideo { get; set; }
         public List<LandArt> LandArts { get; set; }
-        public List<Artwork> Artworks { get; set; }        
+        public List<Artwork> Artworks { get; set; }
         public List<ChildrensText> ChildrensTexts { get; set; }
 
         public int TranslationId { get; set; }
         public Translation Translation { get; set; }
         public bool IsPublished { get; set; }
 
-
+        public string CloudinaryFolderPath { get; set; }
     }
 }

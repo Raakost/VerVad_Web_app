@@ -15,8 +15,9 @@ namespace VerVad_Web.Controllers
     [LoginRequired]
     public class GlobalGoalController : Controller
     {
-        private IServiceGateway<GlobalGoal, int> _GlobalGoalServiceGateway = new ServiceGatewayFacade().GetGlobalGoalServiceGateway();
-        private ILanguageServiceGateway<Language> _languageServiceGateway = new ServiceGatewayFacade().GetLanguageServiceGateway();
+        private readonly IServiceGateway<GlobalGoal, int> _GlobalGoalServiceGateway = new ServiceGatewayFacade().GetGlobalGoalServiceGateway();
+        private readonly ILanguageServiceGateway<Language> _languageServiceGateway = new ServiceGatewayFacade().GetLanguageServiceGateway();
+        private readonly CloudinaryServiceGateway _cloudinaryServiceGateway = new CloudinaryServiceGateway();
 
         [HttpGet]
         public ActionResult Index()
@@ -24,8 +25,16 @@ namespace VerVad_Web.Controllers
             var vm = new GlobalGoalCreateUpdate();
             vm.GlobalGoal = new GlobalGoal();
             vm.Languages = _languageServiceGateway.ReadAll();
+            vm.Folders = _cloudinaryServiceGateway.GetGlobalGoalFolders();
 
             return View(vm);
+        }
+
+        [HttpGet]
+        public ActionResult GetImageModal(string folderPath, int gg_id)
+        {
+            var images = _cloudinaryServiceGateway.GetImages(folderPath);
+            return PartialView();
         }
 
         [HttpPost]
@@ -65,6 +74,7 @@ namespace VerVad_Web.Controllers
                 var vm = new GlobalGoalCreateUpdate();
                 vm.GlobalGoal = gg;
                 vm.Languages = _languageServiceGateway.ReadAll();
+                vm.Folders = _cloudinaryServiceGateway.GetGlobalGoalFolders();
 
                 return View(vm);
             }

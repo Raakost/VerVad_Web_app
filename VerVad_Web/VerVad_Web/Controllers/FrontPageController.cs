@@ -1,6 +1,7 @@
 ﻿using ServiceGateways.Entities;
 using ServiceGateways.Facade;
 using ServiceGateways.Interfaces;
+using ServiceGateways.ServiceGateways;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,9 @@ namespace VerVad_Web.Controllers
     [LoginRequired]
     public class FrontPageController : Controller
     {
-        private IFrontPageServiceGateway<FrontPage, int> _frontPageServiceGateway = new ServiceGatewayFacade().GetFrontPageServiceGateway();
-        private ILanguageServiceGateway<Language> _languageServiceGateway = new ServiceGatewayFacade().GetLanguageServiceGateway();
+        private readonly IFrontPageServiceGateway<FrontPage, int> _frontPageServiceGateway = new ServiceGatewayFacade().GetFrontPageServiceGateway();
+        private readonly ILanguageServiceGateway<Language> _languageServiceGateway = new ServiceGatewayFacade().GetLanguageServiceGateway();
+        private readonly CloudinaryServiceGateway _cloudinaryServiceGateway = new CloudinaryServiceGateway();
 
         [HttpGet]
         public ActionResult Update(int id)
