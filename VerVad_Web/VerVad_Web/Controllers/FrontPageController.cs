@@ -27,7 +27,7 @@ namespace VerVad_Web.Controllers
                 var fp = _frontPageServiceGateway.Read(id);
                 var vm = new FrontPageUpdateViewModel();
                 vm.Frontpage = fp;
-                vm.Languages = _languageServiceGateway.ReadAll();                
+                vm.Languages = _languageServiceGateway.ReadAll();
                 return View(vm);
             }
             catch (Exception e)
@@ -45,21 +45,21 @@ namespace VerVad_Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var fp = _frontPageServiceGateway.Update(vm.Frontpage);
+                    _frontPageServiceGateway.Update(vm.Frontpage);
                     TempData["toast"] = "Dine ændringer er gemt!";
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
                     ModelState.AddModelError("Fejl i model", "Modellen er ugyldig, prøv igen!");
-                    return View("Update", vm.Frontpage);
+                    return View("Update", vm);
                 }
             }
             catch (Exception e)
             {
 
                 ModelState.AddModelError("error", e.Message);
-                return View("Update", vm.Frontpage);
+                return View("Update", vm);
             }
         }
     }

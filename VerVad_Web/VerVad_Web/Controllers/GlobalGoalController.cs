@@ -15,7 +15,7 @@ namespace VerVad_Web.Controllers
     [LoginRequired]
     public class GlobalGoalController : Controller
     {
-        private readonly IServiceGateway<GlobalGoal, int> _GlobalGoalServiceGateway = new ServiceGatewayFacade().GetGlobalGoalServiceGateway();
+        private readonly IServiceGateway<GlobalGoal, int> _globalGoalServiceGateway = new ServiceGatewayFacade().GetGlobalGoalServiceGateway(); 
         private readonly ILanguageServiceGateway<Language> _languageServiceGateway = new ServiceGatewayFacade().GetLanguageServiceGateway();
         private readonly CloudinaryServiceGateway _cloudinaryServiceGateway = new CloudinaryServiceGateway();
 
@@ -45,7 +45,7 @@ namespace VerVad_Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var gg = _GlobalGoalServiceGateway.Create(vm.GlobalGoal);
+                    var gg = _globalGoalServiceGateway.Create(vm.GlobalGoal);
                     TempData["toast"] = "Verdensmålet er oprettet!";
                     return RedirectToAction("Update", new { id = gg.Id });
 
@@ -70,7 +70,7 @@ namespace VerVad_Web.Controllers
         {
             try
             {
-                var gg = _GlobalGoalServiceGateway.Read(id);
+                var gg = _globalGoalServiceGateway.Read(id);
                 var vm = new GlobalGoalCreateUpdate();
                 vm.GlobalGoal = gg;
                 vm.Languages = _languageServiceGateway.ReadAll();
@@ -92,7 +92,7 @@ namespace VerVad_Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    vm.GlobalGoal = _GlobalGoalServiceGateway.Update(vm.GlobalGoal);
+                    vm.GlobalGoal = _globalGoalServiceGateway.Update(vm.GlobalGoal);
                     TempData["toast"] = "Dine ændringer er gemt!";
                     return RedirectToAction("Update");
                 }
@@ -115,7 +115,7 @@ namespace VerVad_Web.Controllers
         {
             try
             {
-                _GlobalGoalServiceGateway.Delete(id);
+                _globalGoalServiceGateway.Delete(id);
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception e)

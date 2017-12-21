@@ -33,9 +33,9 @@ namespace VerVad_Web.Controllers
             }
             else
             {
-                if (gg.Artworks.Any()
-                    || gg.LandArts.Any()
-                    || gg.ChildrensTexts.Any()
+                if (!gg.Artworks.Any()
+                    || !gg.LandArts.Any()
+                    || !gg.ChildrensTexts.Any()
                     || gg.AudioVideo == null)
                 {
                     gg.IsPublished = true;
