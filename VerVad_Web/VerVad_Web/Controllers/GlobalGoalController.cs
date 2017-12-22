@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using VerVad_Web.ViewModels.GlobalGoals;
 using ServiceGateways.ServiceGateways;
 using VerVad_Web.DataAnnotations;
@@ -23,19 +24,27 @@ namespace VerVad_Web.Controllers
         public ActionResult Index()
         {
             var vm = new GlobalGoalCreateUpdate();
-            vm.GlobalGoal = new GlobalGoal();
-            vm.Languages = _languageServiceGateway.ReadAll();
-            vm.Folders = _cloudinaryServiceGateway.GetGlobalGoalFolders();
-
-            return View(vm);
+            try
+            {
+                vm.GlobalGoal = new GlobalGoal();
+                vm.Languages = _languageServiceGateway.ReadAll();
+                vm.Folders = _cloudinaryServiceGateway.GetGlobalGoalFolders();
+                return View(vm);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                TempData["toast"] = "Kunne ikke læse det valgte Verdensmål. Prøv igen eller kontakt administrator";
+                return View(vm);
+            }
         }
 
-        [HttpGet]
-        public ActionResult GetImageModal(string folderPath, int gg_id)
-        {
-            var images = _cloudinaryServiceGateway.GetImages(folderPath);
-            return PartialView();
-        }
+        //[HttpGet]
+        //public ActionResult GetImageModal(string folderPath, int gg_id)
+        //{
+        //    var images = _cloudinaryServiceGateway.GetImages(folderPath);
+        //    return PartialView();
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -120,7 +129,8 @@ namespace VerVad_Web.Controllers
             }
             catch (Exception e)
             {
-                return RedirectToAction("Index", "Home", e.Message);
+                Console.WriteLine(e);
+                return RedirectToAction("Index", "Home", "Kunne ikke slette. Prøv igen eller kontakt administrator");
             }
         }
     }

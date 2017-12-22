@@ -22,13 +22,23 @@ namespace VerVad_Web.Controllers
         public ActionResult Create(int gg_id)
         {
             var vm = new AudioVideoCreateUpdate();
-            vm.AudioVideo = new AudioVideo()
+            try
             {
-                Id = gg_id
-            };
-            vm.Languages = _languageServiceGateway.ReadAll();
-            vm.IsCreate = true;
-            return View("CreateUpdate", vm);
+                
+                vm.AudioVideo = new AudioVideo()
+                {
+                    Id = gg_id
+                };
+                vm.Languages = _languageServiceGateway.ReadAll();
+                vm.IsCreate = true;
+                return View("CreateUpdate", vm);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return View("CreateUpdate",new AudioVideoCreateUpdate());
+            }
+
         }
 
         [HttpPost]
@@ -54,7 +64,7 @@ namespace VerVad_Web.Controllers
             catch (Exception e)
             {
                 ModelState.AddModelError("error", e.Message);
-                return RedirectToAction("Update", "GlobalGoal", new { id = vm.AudioVideo.Id });
+                return RedirectToAction("Update", "GlobalGoal", vm.AudioVideo.Id);
             }
         }
 
@@ -62,10 +72,11 @@ namespace VerVad_Web.Controllers
         [HttpGet]
         public ActionResult Update(int id)
         {
+            var vm = new AudioVideoCreateUpdate();
             try
             {
                 var av = _gateway.Read(id);
-                var vm = new AudioVideoCreateUpdate();
+                
                 vm.AudioVideo = av;
                 vm.Languages = _languageServiceGateway.ReadAll();
 
@@ -73,7 +84,9 @@ namespace VerVad_Web.Controllers
             }
             catch (Exception e)
             {
-                return View(e.Message);
+                Console.WriteLine(e);
+                TempData["toast"] = "Kunne inne finde den valgte AudioVideo. Prøv igen eller kontakt administrator";
+                return View("CreateUpdate", new AudioVideoCreateUpdate());
             }
         }
 
@@ -92,14 +105,14 @@ namespace VerVad_Web.Controllers
                 else
                 {
                     ModelState.AddModelError("Fejl i model", "Modellen er ugyldig, prøv igen!");
-                    return View("Update", vm);
+                    return View("CreateUpdate", vm);
                 }
 
             }
             catch (Exception e)
             {
                 ModelState.AddModelError("error", e.Message);
-                return View("Update", vm);
+                return View("CreateUpdate", vm);
             }
         }
 
@@ -113,7 +126,8 @@ namespace VerVad_Web.Controllers
             }
             catch (Exception e)
             {
-                ModelState.AddModelError("error", e.Message);
+                Console.WriteLine(e);
+                TempData["toast"] = "Kunne ikke slette den valgte AudioVideo. Prøv igen eller kontakt administrator";
                 return RedirectToAction("Update", new { id });
             }
         }

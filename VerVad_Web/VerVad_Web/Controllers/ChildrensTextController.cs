@@ -22,58 +22,132 @@ namespace VerVad_Web.Controllers
         public ActionResult Index(int id)
         {
             var vm = new ChildrensTextIndexModel();
-            vm.ChildrensTexts = _gateway.GetTextsFromGlobalGoal(id);
-            vm.GlobalGoalId = id;
-            return View(vm);
+            try
+            {
+                vm.ChildrensTexts = _gateway.GetTextsFromGlobalGoal(id);
+                vm.GlobalGoalId = id;
+                return View(vm);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                TempData["toast"] = "Kunne ikke læse det valgte ChildrensText. Prøv igen eller kontakt administrator";
+                return View(new ChildrensTextIndexModel());
+            }
+            
+
         }
 
         [HttpGet]
         public ActionResult Create(int gg_id)
         {
             var vm = new ChildrensTextCreateUpdate();
-            vm.GlobalGoalId = gg_id;
-            vm.ChildrensText = new ChildrensText();
-            vm.Languages = _languageServiceGateway.ReadAll();
-            TempData["toast"] = "Teksten er oprettet!";
-            return PartialView("CreateUpdate", vm);
+            try
+            {
+                vm.GlobalGoalId = gg_id;
+                vm.ChildrensText = new ChildrensText();
+                vm.Languages = _languageServiceGateway.ReadAll();
+                TempData["toast"] = "Teksten er oprettet!";
+                return PartialView("CreateUpdate", vm);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                TempData["toast"] = "Fejl i indlæsning af ChildrensText. Prøv igen eller kontakt administrator";
+                return PartialView("CreateUpdate", new ChildrensTextCreateUpdate());
+            }
+            
+
         }
 
         [HttpGet]
         public ActionResult Update(int id)
         {
             var vm = new ChildrensTextCreateUpdate();
-            vm.ChildrensText = _gateway.Read(id);
-            vm.Languages = _languageServiceGateway.ReadAll();
-            vm.GlobalGoalId = vm.ChildrensText.GlobalGoalId;
-            TempData["toast"] = "Dine ændringer er gemt!";
-            return PartialView("CreateUpdate", vm);
+            try
+            {
+                vm.ChildrensText = _gateway.Read(id);
+                vm.Languages = _languageServiceGateway.ReadAll();
+                vm.GlobalGoalId = vm.ChildrensText.GlobalGoalId;
+                TempData["toast"] = "Dine ændringer er gemt!";
+                return PartialView("CreateUpdate", vm);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                TempData["toast"] = "Fejl i indlæsning af ChildrensText. Prøv igen eller kontakt administrator";
+                return PartialView("CreateUpdate", new ChildrensTextCreateUpdate());
+            }
+            
+
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(ChildrensTextCreateUpdate vm)
         {
-            var text = _gateway.Create(vm.ChildrensText);
-            return RedirectToAction("Index", new { id = vm.ChildrensText.GlobalGoalId });
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var text = _gateway.Create(vm.ChildrensText);
+                    return RedirectToAction("Index", new {id = vm.ChildrensText.GlobalGoalId});
+                }
+                else
+                {
+                    ModelState.AddModelError("Fejl i model", "Modellen er ugyldig, prøv igen!");
+                    return RedirectToAction("Index", new {id = vm.ChildrensText.GlobalGoalId});
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                TempData["toast"] = "Kunne ikke oprette den valgte ChildrensText. Prøv igen eller kontakt administrator";
+                return RedirectToAction("Index", vm.ChildrensText);
+            }
+
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Update(ChildrensTextCreateUpdate vm)
         {
-            var ct = new ChildrensText();
-
+            try
             {
-                vm.ChildrensText = _gateway.Update(vm.ChildrensText);
-                return RedirectToAction("Index", new { id = vm.ChildrensText.GlobalGoalId });
+                if (ModelState.IsValid)
+                {
+                    vm.ChildrensText = _gateway.Update(vm.ChildrensText);
+                    return RedirectToAction("Index", new { id = vm.ChildrensText.GlobalGoalId });
+                }
+                else
+                {
+                    ModelState.AddModelError("Fejl i model", "Modellen er ugyldig, prøv igen!");
+                    return RedirectToAction("Index", new { id = vm.ChildrensText.GlobalGoalId });
+                }
             }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("error", e.Message);
+                return RedirectToAction("Index", vm.ChildrensText);
+            }
+
         }
 
         [HttpPost]
         public ActionResult Delete(int id, int gg_id)
         {
-            _gateway.Delete(id);
-            return RedirectToAction("Index", new { id = gg_id });
+            try
+            {
+                _gateway.Delete(id);
+                return RedirectToAction("Index", new { id = gg_id });
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                TempData["toast"] = "Kunne ikke slette den valgte ChildrensText. Prøv igen eller kontakt administrator";
+                return RedirectToAction("Index", new { id = gg_id });
+            }
+
         }
     }
 }
