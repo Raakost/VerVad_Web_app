@@ -399,6 +399,7 @@ namespace VerVad_Web.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Session["token"] = null;
             return RedirectToAction("Index", "Home");
         }
 

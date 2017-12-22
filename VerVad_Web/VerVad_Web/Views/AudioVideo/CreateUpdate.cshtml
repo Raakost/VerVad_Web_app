@@ -67,7 +67,7 @@
 
     @using (Html.BeginForm("Delete", "AudioVideo", FormMethod.Post))
     {   <input type="hidden" name="id" value="@Model.AudioVideo.Id" />
-    <button style="position: absolute; right: 205px; top: 487px;" type="submit" class="btn-sm btn-labeled btn-danger remove-border-radius-border">
+    <button onClick="return confirm('Er du sikker på du vil slette?');" style="position: absolute; right: 205px; top: 487px;" type="submit" class="btn-sm btn-labeled btn-danger remove-border-radius-border">
         <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Slet
     </button>
     }

@@ -70,7 +70,7 @@
                         @using (Html.BeginForm("Delete", "GlobalGoal", FormMethod.Post))
                         {
                             <input type="hidden" name="id" value="@item.Id" />
-                            <button type="submit" class="btn-sm btn-labeled btn-danger remove-border-radius-border">
+                            <button onClick="return confirm('Er du sikker på du vil slette?');" type="submit" class="btn-sm btn-labeled btn-danger remove-border-radius-border">
                                 <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Slet
                             </button>
                         }
